@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^5.6.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -10,16 +11,33 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "craco-alias": "^2.1.1",
+    "cross-env": "^7.0.2",
+    "easy-peasy": "^3.3.0",
+    "redux-devtools-extension": "^2.13.8",
+    "electron-is-dev": "^1.2.0",
+    "electron-store": "^5.1.1",
+    "electronic-post-message": "^1.0.0",
+    "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "styled-components": "^5.1.0",
+    "styled-tools": "^1.7.1",
     "typescript": "~3.7.2"
   },
+  "build": {
+    "appId": "<com.your_app>"
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"cross-env BROWSER=none craco start\" \"wait-on http://localhost:3000 && electron .\"",
+    "build": "craco build && yarn electron-builder",
+    "package": "yarn build && electron-builder build -mwl",
+    "release": "craco build && electron-builder --publish=always",
+    "test": "craco test"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +53,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "rescripts": [
+    "env"
+  ],
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "electron": "^8.2.3",
+    "electron-builder": "^22.5.1",
+    "wait-on": "^4.0.2"
   }
 }
