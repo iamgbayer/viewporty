@@ -10,6 +10,8 @@ import firstWave from '../../assets/images/firstWave.svg'
 import { Text, Icon, Modal, Button } from '../../components'
 import { breakpoints, enterWithY } from '../../helpers'
 
+import Head from './Head'
+
 const Container = styled.div`
   max-width: 960px;
   width: 100%;
@@ -159,10 +161,10 @@ export default function Landing() {
     size: 11
   })
 
-  const { modal, status, size } = config
-
   return (
     <Content>
+      <Head />
+
       <Nav>
         <Logo onClick={() => {}} width={250} height={75} name="logo" />
 
