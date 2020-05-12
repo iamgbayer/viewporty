@@ -171,6 +171,7 @@ export default function Landing() {
         <Menu>
           <Text>Twitter</Text>
           <Text>FAQ</Text>
+          <Text>Get early access</Text>
         </Menu>
       </Nav>
 
