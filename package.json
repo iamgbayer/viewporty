@@ -6,7 +6,8 @@
   "dependencies": {},
   "scripts": {
     "start": "lerna run start",
-    "start:landing": "yarn workspace @responsivy/landing dev",
+    "dev:landing": "yarn workspace @responsivy/landing dev",
+    "start:landing": "yarn workspace @responsivy/landing start",
     "start:desktop": "yarn workspace @responsivy/desktop start",
     "build:landing": "yarn workspace @responsivy/landing build",
     "bootstrap": "lerna bootstrap"
