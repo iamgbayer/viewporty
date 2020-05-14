@@ -60,11 +60,9 @@
     "webpack-merge": "^4.2.2"
   },
   "scripts": {
-    "build:components": "build-storybook -s ./src/assets",
-    "start:components": "start-storybook -p 6006 -s ./src/assets",
-    "dev": "next-translate && next dev",
+    "dev": "next-translate && next dev --port 4000",
     "build": "next-translate && next build",
-    "start": "next start"
+    "start": "next-translate && next start"
   },
   "eslintConfig": {
     "extends": "react-app"
