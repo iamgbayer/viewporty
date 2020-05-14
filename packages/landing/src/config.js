@@ -12,7 +12,7 @@ const config = {
   measurementId: 'G-6MT6M77K4Z'
 }
 
-firebase.initializeApp(config)
+!firebase.apps.length && firebase.initializeApp(config)
 
 const db = firebase.firestore()
 const auth = firebase.auth()

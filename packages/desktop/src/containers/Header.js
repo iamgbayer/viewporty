@@ -16,7 +16,7 @@ const Container = styled.div`
 `
 
 const Bar = styled.div`
-  // -webkit-app-region: drag;
+  -webkit-app-region: drag;
   position: fixed;
   width: 100%;
   height: 36px;
@@ -38,7 +38,7 @@ const Address = styled.input`
   padding: 0 10px;
   background-color: ${theme('colors.six')};
   border-radius: ${theme('border.radius.four')};
-  color: ${theme('colors.five')};
+  color: ${theme('colors.three')};
   font-family: ${theme('font.family.one')};
 
   &:focus {

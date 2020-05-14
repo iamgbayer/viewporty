@@ -7,6 +7,7 @@ export const Tokens = {
     }
   },
   zindex: {
+    negative: -1,
     one: 1,
     overlay: 8000,
     overlaid: 9999

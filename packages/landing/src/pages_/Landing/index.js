@@ -14,6 +14,7 @@ import printscreen from '@/assets/images/printscreen.png'
 
 import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
+import { auth } from '@/config'
 
 import Head from './Head'
 import Features from './Features'
@@ -185,13 +186,11 @@ const Printscreen = styled.img`
 `
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Required'),
   email: Yup.string().email('Invalid format').required('Required'),
   password: Yup.string().min(8, 'Minimum 8 characters').required('Required')
 })
 
 const initialValues = {
-  name: '',
   email: '',
   password: ''
 }
@@ -210,10 +209,15 @@ export default function Landing() {
     validationSchema
   })
 
-  const { name, email, password } = values
+  const { email, password } = values
 
-  const signup = () => {
+  const getEarlyAccessAccount = () => {
     validateForm()
+
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(console.log)
+      .catch(console.log)
   }
 
   useEffect(() => {
@@ -227,20 +231,6 @@ export default function Landing() {
   return (
     <>
       <Modal isOpen={modal} close={() => setModal(false)}>
-        <Input
-          id="name"
-          full={true}
-          label="Your complete name"
-          placeholder="John Doe"
-          value={name}
-          error={{
-            has: !!errors.name,
-            message: errors.name
-          }}
-          onChange={handleChange}
-          bottom={10}
-        />
-
         <Input
           id="email"
           full={true}
@@ -256,6 +246,7 @@ export default function Landing() {
         />
 
         <Input
+          type="password"
           id="password"
           full={true}
           placeholder="••••••••"
@@ -272,7 +263,7 @@ export default function Landing() {
         <Button
           full={true}
           top={30}
-          onClick={() => setModal(true)}
+          onClick={getEarlyAccessAccount}
           variant="secondary"
         >
           Get early access
