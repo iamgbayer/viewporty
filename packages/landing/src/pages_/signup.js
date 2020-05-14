@@ -4,7 +4,6 @@ import { useFormik } from 'formik'
 import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
 
-import { hasTenantOfString } from '../helpers'
 import { Input, Text, Button } from '@responsivy/components'
 
 const Container = styled.div`
@@ -45,14 +44,6 @@ const initialValues = {
   domain: ''
 }
 
-export async function getServerSideProps({ req }) {
-  const hasTenant = hasTenantOfString(req.headers.host)
-
-  return {
-    props: {}
-  }
-}
-
 export default function Signup() {
   const { colors } = useContext(ThemeContext)
 
@@ -61,8 +52,7 @@ export default function Signup() {
     isInitialValid: validationSchema.isValidSync(initialValues),
     validateOnChange: true,
     validateOnBlur: true,
-    validationSchema,
-    onSubmit: console.info
+    validationSchema
   })
 
   const { name, email, password, company, domain } = values

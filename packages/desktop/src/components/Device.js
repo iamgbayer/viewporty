@@ -6,7 +6,7 @@ import { useStoreActions } from 'easy-peasy'
 
 import { Text } from '@responsivy/components'
 
-import { on, EVENTS } from '@/emitter'
+import { once, removeListener, EVENTS } from '@/emitter'
 
 const { remote } = window.require('electron')
 
@@ -15,13 +15,13 @@ const Container = styled.div`
   display: inline-block;
   margin-right: 35px;
   margin-bottom: 35px;
-  width: ${prop('width')}px;
 `
 
 const Display = styled.div`
   box-shadow: ${theme('shadow.one')};
 
   & > webview {
+    width: ${prop('width')}px;
     height: ${prop('height')}px;
     display: flex;
   }
@@ -39,69 +39,65 @@ const Zoom = styled.span`
   }
 `
 
-export const Device = memo(({ url, name, width, height, userAgent, zoom }) => {
-  const ref = useRef()
-  const { setUrl } = useStoreActions(({ history }) => history)
-  const { colors } = useContext(ThemeContext)
+export const Device = memo(
+  ({ url, name, width, height, userAgent, zoom, orientation }) => {
+    const ref = useRef()
+    const { setUrl } = useStoreActions(({ history }) => history)
+    const { colors } = useContext(ThemeContext)
 
-  useEffect(() => {
-    const webview = ref.current
+    useEffect(() => {
+      const webview = ref.current
 
-    if (isNil(webview)) {
-      return
-    }
+      if (isNil(webview)) {
+        return
+      }
 
-    webview.addEventListener('dom-ready', () => {
-      const { webContents } = webview.getWebContents()
-      // webview.openDevTools()
+      webview.addEventListener('dom-ready', () => {
+        const { webContents } = webview.getWebContents()
+        // webview.openDevTools()
 
-      on(EVENTS.reload, (url) => webview.loadURL(url))
+        once(EVENTS.reload, (url) => webContents.loadURL(url))
 
-      webContents.enableDeviceEmulation({
-        screenPosition: 'mobile',
-        screenSize: {
-          width,
-          height
-        },
-        viewSize: {
-          width,
-          height
-        }
+        webContents.enableDeviceEmulation({
+          screenPosition: 'mobile',
+          screenSize: {
+            width,
+            height
+          },
+          viewSize: {
+            width,
+            height
+          }
+        })
+
+        webview.addEventListener(
+          'will-navigate',
+          (event) => not(equals(event.url, url)) && setUrl(event.url)
+        )
       })
 
-      webview.addEventListener(
-        'will-navigate',
-        (event) => not(equals(event.url, url)) && setUrl(event.url)
-      )
+      return () => removeListener(EVENTS.reload)
+    }, [])
 
-      // webview.addEventListener('did-navigate', console.log)
-      // webview.insertCSS(scrollbar)
-      // webview.addEventListener('ipc-message', ({ args }) => {
-      //   const [config] = args
-      //   // console.log(webContents.getAllWebContents())
-      //   webview.send('toScroll', config)
-      // })
-    })
-  }, [])
+    return (
+      <Container>
+        <Controls>
+          <Text color={colors.three}>{name}</Text>
+          <Text color={colors.five} size="thirteen">
+            ({width} x {height}) <Zoom>{zoom}%</Zoom>
+          </Text>
+        </Controls>
 
-  return (
-    <Container width={width}>
-      <Controls>
-        <Text color={colors.three}>{name}</Text>
-        <Text color={colors.five} size="thirteen">
-          ({width} x {height}) <Zoom>{zoom}%</Zoom>
-        </Text>
-      </Controls>
-
-      <Display height={height}>
-        <webview
-          id="webview"
-          useragent={userAgent}
-          ref={ref}
-          src={url}
-          preload={`file://${remote.app.getAppPath()}/public/preload.js`}
-        />
-      </Display>
-    </Container>
-  )
-})
+        <Display width={width} height={height}>
+          <webview
+            id="webview"
+            useragent={userAgent}
+            ref={ref}
+            src={url}
+            preload={`file://${remote.app.getAppPath()}/public/preload.js`}
+          />
+        </Display>
+      </Container>
+    )
+  }
+)

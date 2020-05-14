@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { theme, ifProp } from 'styled-tools'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'next-translate'
 import Link from 'next-translate/Link'
 import media from 'styled-media-query'
+import { lte } from 'ramda'
 
 import firstWave from '@/assets/images/firstWave.svg'
 
@@ -115,7 +116,7 @@ const Nav = styled(Container)`
   justify-content: space-between;
   margin-top: 20px;
 
-  ${media.lessThan('small')`
+  ${media.lessThan('medium')`
     margin-top: 0;
   `}
 `
@@ -133,7 +134,7 @@ const Menu = styled.div`
     color: ${theme('colors.three')};
   }
 
-  ${media.lessThan('small')`
+  ${media.lessThan('medium')`
     width: 100%;
     height: 100vh;
     background-color: ${theme('colors.four')};
@@ -159,15 +160,12 @@ const Menu = styled.div`
 `
 
 const Hamburguer = styled(Icon)`
-  display: none;
   position: absolute;
   top: 20px;
   right: 20px;
   z-index: ${theme('zindex.overlaid')};
 
-  ${media.lessThan('small')`
-    display: block;
-
+  ${media.lessThan('medium')`
     path {
       stroke: ${ifProp({ hasMenuOpen: true }, theme('colors.one'))};
     }
@@ -175,9 +173,17 @@ const Hamburguer = styled(Icon)`
 `
 
 export default function Landing() {
+  const [isMobile, setIsMobile] = useState(false)
   const [hasMenuOpen, setMenuOpen] = useState(true)
-
   const { t } = useTranslation()
+
+  useEffect(() => {
+    setIsMobile(lte(window.innerWidth, 768))
+  }, [])
+
+  useEffect(() => {
+    isMobile && setMenuOpen(false)
+  }, [isMobile])
 
   return (
     <Content>
@@ -186,21 +192,19 @@ export default function Landing() {
       <Nav>
         <Logo onClick={() => {}} width={250} height={75} name="logo" />
 
-        <Hamburguer
-          name="menu"
-          width={30}
-          height={30}
-          hasMenuOpen={hasMenuOpen}
-          onClick={() => setMenuOpen(!hasMenuOpen)}
-        />
+        {isMobile && (
+          <Hamburguer
+            name="menu"
+            width={30}
+            height={30}
+            hasMenuOpen={hasMenuOpen}
+            onClick={() => setMenuOpen(!hasMenuOpen)}
+          />
+        )}
 
         {hasMenuOpen && (
           <Menu>
-            <Text
-              onClick={() => setMenuOpen(false)}
-              className="navigable"
-              weight="medium"
-            >
+            <Text className="navigable" weight="medium">
               <a href="https://twitter.com/responsivy" target="_blank">
                 Twitter
               </a>
@@ -215,7 +219,7 @@ export default function Landing() {
             </Text>
 
             <Text className="navigable" weight="medium">
-              Get early access
+              Suggest features
             </Text>
           </Menu>
         )}

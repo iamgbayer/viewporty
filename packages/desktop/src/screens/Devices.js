@@ -76,14 +76,15 @@ export const Devices = () => {
       {isValidUrl(url) &&
         devices
           .filter(({ isHidden }) => not(isHidden))
-          .map(({ name, width, height, userAgent, zoom }) => (
+          .map(({ name, width, height, userAgent, zoom, orientation }) => (
             <Device
               url={url}
               name={name}
-              key={name}
-              width={width}
+              key={`${name}-${orientation}`}
+              width={equals(orientation, 'portrait') ? width : height}
               zoom={zoom}
-              height={height}
+              height={equals(orientation, 'portrait') ? height : width}
+              orientation={orientation}
               userAgent={userAgent}
             />
           ))}

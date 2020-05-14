@@ -46,18 +46,24 @@ const state = {
         category: 'phone',
         width: 360,
         height: 640,
+        defaultWidth: 360,
+        defaultHeight: 640,
         isHidden: false,
         zoom: 100,
+        orientation: 'portrait',
         userAgent:
           'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Mobile Safari/537.36'
       },
       {
         name: 'iPad',
         category: 'tablet',
-        width: 768,
         isHidden: true,
-        zoom: 100,
+        width: 768,
         height: 1024,
+        defaultWidth: 768,
+        defaultHeight: 1024,
+        orientation: 'portrait',
+        zoom: 100,
         userAgent: ''
       },
       {
@@ -65,7 +71,10 @@ const state = {
         category: 'phone',
         width: 320,
         height: 568,
+        defaultWidth: 320,
+        defaultHeight: 568,
         isHidden: false,
+        orientation: 'portrait',
         zoom: 100,
         userAgent:
           'Mozilla/5.0 (iPhone; CPU iPhone OS 13_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/66.6 Mobile/14A5297c Safari/602.1'
@@ -73,9 +82,12 @@ const state = {
       {
         name: 'iPhone 6/7/8',
         category: 'phone',
-        width: 375,
         isHidden: true,
+        width: 375,
         height: 667,
+        defaultWidth: 375,
+        defaultHeight: 667,
+        orientation: 'portrait',
         zoom: 100,
         userAgent: ''
       },
@@ -83,13 +95,23 @@ const state = {
         name: 'Pixel 2',
         category: 'phone',
         isHidden: true,
-        width: 411,
         zoom: 100,
+        width: 411,
         height: 731,
+        defaultWidth: 411,
+        defaultHeight: 731,
+        orientation: 'portrait',
         userAgent: ''
       }
     ],
     setDevices: action((state, data) => evolve({ data: always(data) }, state)),
+    toggleOrientation: action((state, orientation) => {
+      const { data } = state
+
+      const devices = map(assoc('orientation', orientation), data)
+
+      return evolve({ data: always(devices) }, state)
+    }),
     toggleVisibility: action((state, { name, isHidden }) => {
       const { data } = state
 

@@ -26,7 +26,6 @@ const Container = styled(Box)`
 export const Icon = memo(
   ({ name, color, width = 20, height = 20, ...props }) => {
     const { colors, theme } = useContext(ThemeContext)
-    console.log(theme)
 
     const Iconable = Icons[capitalize(name)]
 

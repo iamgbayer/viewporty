@@ -53,13 +53,26 @@ Option.Container = styled.div`
 `
 
 export const Sidebar = ({ children }) => {
-  const { setModal } = useStoreActions(({ config }) => config)
+  const { setModal, toggleOrientation } = useStoreActions(
+    ({ config, devices }) => ({
+      toggleOrientation: devices.toggleOrientation,
+      setModal: config.setModal
+    })
+  )
 
   return (
     <Container>
       <Bar>
-        <Option icon="portrait" description="Rotate portrait" />
-        <Option icon="phone" description="Rotate landscape" />
+        <Option
+          onClick={() => toggleOrientation('portrait')}
+          icon="phone"
+          description="Rotate portrait"
+        />
+        <Option
+          onClick={() => toggleOrientation('landscape')}
+          icon="portrait"
+          description="Rotate landscape"
+        />
 
         <Separator />
 
