@@ -5,7 +5,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
 
 import { hasTenantOfString } from '../helpers'
-import { Input, Text, Button } from '../components'
+import { Input, Text, Button } from '@responsivy/components'
 
 const Container = styled.div`
   display: flex;
@@ -31,12 +31,8 @@ const Domain = styled.div`
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
-  email: Yup.string()
-    .email('Invalid format')
-    .required('Required'),
-  password: Yup.string()
-    .min(8, 'Minimum 8 characters')
-    .required('Required'),
+  email: Yup.string().email('Invalid format').required('Required'),
+  password: Yup.string().min(8, 'Minimum 8 characters').required('Required'),
   company: Yup.string().required('Required'),
   domain: Yup.string().required('Required')
 })
