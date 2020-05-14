@@ -8,17 +8,17 @@ import { Box } from './Box'
 const { font } = Tokens
 
 const Texteable = styled.span`
-  font-family: ${theme('font.family.primary')};
+  font-family: ${theme('font.family.one')};
   font-weight: ${prop('weight')};
   font-size: ${prop('size')};
-  color: ${prop('color')};
+  color: ${ifProp('color', prop('color'), theme('colors.three'))};
+
   ${ifProp(
     'height',
     css`
       line-height: ${prop('height')}px;
     `
   )};
-
   ${ifProp(
     { align: 'center' },
     css`
@@ -29,7 +29,7 @@ const Texteable = styled.span`
 
 export function Text({
   weight = 'regular',
-  size = 'sixteen',
+  size = 'fifteen',
   color,
   children,
   height,
@@ -38,11 +38,11 @@ export function Text({
   return (
     <Box {...props}>
       <Texteable
+        {...props}
         height={height}
         color={color}
         size={font.size[size]}
         weight={font.weight[weight]}
-        {...props}
       >
         {children}
       </Texteable>

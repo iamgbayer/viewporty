@@ -4,7 +4,8 @@ import { prop, theme } from 'styled-tools'
 import { isNil, not, equals } from 'ramda'
 import { useStoreActions } from 'easy-peasy'
 
-import { Text } from './Text'
+import { Text } from '@responsivy/components'
+
 import { on, EVENTS } from '@/emitter'
 
 const { remote } = window.require('electron')

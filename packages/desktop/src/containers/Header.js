@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
-import { not, equals, isNil, findIndex, subtract, indexOf } from 'ramda'
+import { not, equals, isNil, indexOf } from 'ramda'
 import { useStoreActions, useStoreState } from 'easy-peasy'
 
-import { Icon, WindowControl } from '@/components'
+import { WindowControl } from '@/components'
+import { Icon } from '@responsivy/components'
+
 import { emit, EVENTS } from '@/emitter'
 
 const Container = styled.div`

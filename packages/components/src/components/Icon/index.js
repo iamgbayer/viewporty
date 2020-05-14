@@ -1,11 +1,10 @@
 import React, { memo, useContext } from 'react'
 import styled, { ThemeContext, css } from 'styled-components'
 import { ifProp } from 'styled-tools'
-
-import { Box } from '@/components'
-
-import * as Icons from './Icons'
 import { equals } from 'ramda'
+
+import { Box } from '../Box'
+import * as Icons from './Icons'
 
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 

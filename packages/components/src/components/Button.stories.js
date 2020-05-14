@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import { GROUPS } from '@helpers/hierarchySeparators'
 import { Container } from '@helpers/components/Container'
 
-import { Reset } from '@components/Reset'
-import { Button } from '@components/Button'
-import { Icon } from '@components/Icon'
+import { Reset } from './Reset'
+import { Button } from './Button'
+import { Icon } from './Icon'
 
 const Buttons = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const Buttons = styled.div`
 `
 
 storiesOf(`${GROUPS.COMPONENTS}|Button`, module)
-  .addDecorator(story => (
+  .addDecorator((story) => (
     <Container>
       <Reset />
       {story()}

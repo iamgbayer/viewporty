@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import TagManager from 'react-gtm-module'
 import { ThemeProvider } from 'styled-components'
 
-import { Tokens, Reset } from '../components'
+import { Theme, Reset } from '@responsivy/components'
+import { Fonts } from '@/components'
 
 const tagManagerArgs = {
   gtmId: 'GTM-MD9MMWS'
@@ -14,8 +15,9 @@ export default function App({ Component, pageProps }) {
   }, [])
 
   return (
-    <ThemeProvider theme={Tokens}>
+    <ThemeProvider theme={Theme.light}>
       <Reset />
+      <Fonts />
       <Component {...pageProps} />
     </ThemeProvider>
   )

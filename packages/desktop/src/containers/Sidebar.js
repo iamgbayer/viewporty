@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
 
-import { Icon, Text } from '@/components'
+import { Icon, Text } from '@responsivy/components'
 import { useStoreActions } from 'easy-peasy'
 
 const Container = styled.div`

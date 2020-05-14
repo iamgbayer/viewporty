@@ -13,8 +13,8 @@ const Container = styled(Box)`
   })};
   cursor: pointer;
   background-color: ${switchProp('variant', {
-    primary: theme('colors.primary'),
-    secondary: theme('colors.secondary')
+    primary: theme('colors.one'),
+    secondary: theme('colors.four')
   })};
 
   padding: ${switchProp('size', {
@@ -25,7 +25,7 @@ const Container = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: ${theme('border.radius.five')};
+  border-radius: ${theme('border.radius.four')};
   position: relative;
   transition: all 0.4s ease-in-out;
 
@@ -73,7 +73,7 @@ export const Button = ({
       variant={variant}
       {...props}
     >
-      <Text color={colors.support.primary} size="eleven" weight="bold">
+      <Text color={colors.one} size="eleven" weight="medium">
         {children}
 
         {icon && (
@@ -81,7 +81,7 @@ export const Button = ({
             {icon({
               width: 12,
               height: 12,
-              color: colors.support.primary
+              color: colors.one
             })}
           </Icon>
         )}

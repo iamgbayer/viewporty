@@ -12857,6 +12857,14 @@ next-translate@^0.14.1:
   resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-0.14.3.tgz#95dd240d1b94c25810f4e70085f62034cd55493e"
   integrity sha512-/Qy+Kv+J2AYxlSu4/YfnqI58CRiYyflhLH4ouTHCqFUfKviBVdMJz5n2teFaJerjw7xT6I3F9nB2hXCjHw7XPQ==
 
+next-transpile-modules@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/next-transpile-modules/-/next-transpile-modules-3.3.0.tgz#90f197d1ceda2a2ce7a4f423b262320354456abf"
+  integrity sha512-QIaBunwtC9oNaluQvfJw5hv1uXSAlTzDCc7/FUxZw5Rnm0yo1HJjW6YodFvA+7Xm9k/2fZV2itF99vMBwTOUjQ==
+  dependencies:
+    micromatch "^4.0.2"
+    slash "^3.0.0"
+
 next@^9.3.2:
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/next/-/next-9.4.0.tgz#7a3a8a4f1d1674b165998741c0b3826a1cce33d3"
