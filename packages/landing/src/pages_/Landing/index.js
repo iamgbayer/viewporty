@@ -6,24 +6,33 @@ import { useTranslation } from 'next-translate'
 import Link from 'next-translate/Link'
 import media from 'styled-media-query'
 import { lte } from 'ramda'
+import * as Yup from 'yup'
+import { useFormik } from 'formik'
 
 import firstWave from '@/assets/images/firstWave.svg'
+import printscreen from '@/assets/images/printscreen.png'
 
-import { Icon, Button, Text } from '@responsivy/components'
+import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
 
 import Head from './Head'
 import Features from './Features'
+import Faq from './Faq'
 
 const Container = styled.div`
   max-width: 960px;
   width: 100%;
+  height: 100%;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   z-index: ${theme('zindex.one')};
 
   ${media.lessThan('large')`
     padding: 0 15px;
-  `}
+  `};
 `
 
 const Description = styled(Text)`
@@ -56,7 +65,7 @@ const Title = styled(Text)`
 
 const Header = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -65,20 +74,15 @@ const Header = styled.div`
   ${media.lessThan('small')`
     display: flex;
     align-items: center;
-    height: 100vh;
   `}
 `
 
 Header.Content = styled(motion.div)`
-  height: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  ${media.lessThan('small')`
-    padding-top: 0;
-  `}
+  margin-top: 10%;
 `
 
 const FirstWave = styled.img`
@@ -114,10 +118,10 @@ const Nav = styled(Container)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
+  padding-top: 20px;
 
   ${media.lessThan('medium')`
-    margin-top: 0;
+    padding-top: 40px;
   `}
 `
 
@@ -167,15 +171,50 @@ const Hamburguer = styled(Icon)`
 
   ${media.lessThan('medium')`
     path {
-      stroke: ${ifProp({ hasMenuOpen: true }, theme('colors.one'))};
+      stroke: ${ifProp({ isMenuOpen: true }, theme('colors.one'))};
     }
   `};
 `
 
+const Printscreen = styled.img`
+  border-radius: ${theme('border.radius.two')};
+  box-shadow: ${theme('shadow.two')};
+  margin-top: 150px;
+  max-width: 1080px;
+  width: 100%;
+`
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid format').required('Required'),
+  password: Yup.string().min(8, 'Minimum 8 characters').required('Required')
+})
+
+const initialValues = {
+  name: '',
+  email: '',
+  password: ''
+}
+
 export default function Landing() {
   const [isMobile, setIsMobile] = useState(false)
-  const [hasMenuOpen, setMenuOpen] = useState(true)
+  const [isMenuOpen, setMenuOpen] = useState(true)
+  const [modal, setModal] = useState(false)
   const { t } = useTranslation()
+
+  const { handleChange, values, isValid, errors, validateForm } = useFormik({
+    initialValues,
+    isInitialValid: validationSchema.isValidSync(initialValues),
+    validateOnChange: true,
+    validateOnBlur: true,
+    validationSchema
+  })
+
+  const { name, email, password } = values
+
+  const signup = () => {
+    validateForm()
+  }
 
   useEffect(() => {
     setIsMobile(lte(window.innerWidth, 768))
@@ -186,46 +225,102 @@ export default function Landing() {
   }, [isMobile])
 
   return (
-    <Content>
-      <Head />
+    <>
+      <Modal isOpen={modal} close={() => setModal(false)}>
+        <Input
+          id="name"
+          full={true}
+          label="Your complete name"
+          placeholder="John Doe"
+          value={name}
+          error={{
+            has: !!errors.name,
+            message: errors.name
+          }}
+          onChange={handleChange}
+          bottom={10}
+        />
 
-      <Nav>
-        <Logo onClick={() => {}} width={250} height={75} name="logo" />
+        <Input
+          id="email"
+          full={true}
+          label="Email"
+          placeholder="john@doe.com"
+          onChange={handleChange}
+          error={{
+            has: !!errors.email,
+            message: errors.email
+          }}
+          value={email}
+          bottom={10}
+        />
 
-        {isMobile && (
-          <Hamburguer
-            name="menu"
-            width={30}
-            height={30}
-            hasMenuOpen={hasMenuOpen}
-            onClick={() => setMenuOpen(!hasMenuOpen)}
-          />
-        )}
+        <Input
+          id="password"
+          full={true}
+          placeholder="••••••••"
+          label="Password"
+          error={{
+            has: !!errors.password,
+            message: errors.password
+          }}
+          onChange={handleChange}
+          value={password}
+          bottom={10}
+        />
 
-        {hasMenuOpen && (
-          <Menu>
-            <Text className="navigable" weight="medium">
-              <a href="https://twitter.com/responsivy" target="_blank">
-                Twitter
-              </a>
-            </Text>
+        <Button
+          full={true}
+          top={30}
+          onClick={() => setModal(true)}
+          variant="secondary"
+        >
+          Get early access
+        </Button>
+      </Modal>
 
-            <Text className="navigable" weight="medium">
-              Features
-            </Text>
+      <Content>
+        <Head />
 
-            <Text className="navigable" weight="medium">
-              FAQ
-            </Text>
+        <Nav>
+          <Logo onClick={() => {}} width={250} height={75} name="logo" />
 
-            <Text className="navigable" weight="medium">
-              Suggest features
-            </Text>
-          </Menu>
-        )}
-      </Nav>
+          {isMobile && (
+            <Hamburguer
+              name="menu"
+              width={30}
+              height={30}
+              isMenuOpen={isMenuOpen}
+              onClick={() => setMenuOpen(!isMenuOpen)}
+            />
+          )}
 
-      {/* 
+          {isMenuOpen && (
+            <Menu>
+              <Text className="navigable" weight="medium">
+                <a href="https://twitter.com/responsivy" target="_blank">
+                  Twitter
+                </a>
+              </Text>
+
+              <Text className="navigable" weight="medium">
+                Features
+              </Text>
+
+              <Text className="navigable" weight="medium">
+                FAQ
+              </Text>
+
+              <Text className="navigable" weight="medium">
+                <a href="https://trello.com/b/P7Mly36u/roadmap" target="_blank">
+                  Suggest features
+                </a>
+              </Text>
+            </Menu>
+          )}
+        </Nav>
+
+        {/* 
       <Languages variants={enterWithY(10)}>
         <Link href="/" lang="en" key="en">
           <Language>EN</Language>
@@ -236,44 +331,53 @@ export default function Landing() {
         </Link>
       </Languages> */}
 
-      <Header>
-        <Container>
-          <Header.Content
-            exit="exit"
-            initial="initial"
-            animate="enter"
-            variants={{
-              initial: { y: -200 },
-              enter: { transition: { staggerChildren: 0.4 } }
-            }}
-          >
-            <motion.div variants={enterWithY(200)}>
-              <Title weight="bold">The browser for developers</Title>
-            </motion.div>
+        <Header>
+          <Container>
+            <Header.Content
+              exit="exit"
+              initial="initial"
+              animate="enter"
+              variants={{
+                initial: { y: -200 },
+                enter: { transition: { staggerChildren: 0.4 } }
+              }}
+            >
+              <motion.div variants={enterWithY(200)}>
+                <Title weight="bold">
+                  Creating responsive has never been easier.
+                </Title>
+              </motion.div>
 
-            <motion.div variants={enterWithY(200)}>
-              <Description
-                size="nineteen"
-                weight="light"
-                height={22}
-                top={30}
-                bottom={40}
-              >
-                Spend half the time designing and developing responsive websites
-                by testing them on multiple screens at once.
-              </Description>
-            </motion.div>
+              <motion.div variants={enterWithY(200)}>
+                <Description
+                  size="nineteen"
+                  weight="light"
+                  height={22}
+                  top={30}
+                  bottom={40}
+                >
+                  Spend half the time designing and developing responsive
+                  websites by testing them on multiple screens at once.
+                </Description>
+              </motion.div>
 
-            <motion.div variants={enterWithY(200)}>
-              <Button variant="secondary">Get early access</Button>
-            </motion.div>
-          </Header.Content>
-        </Container>
+              <motion.div variants={enterWithY(200)}>
+                <Button onClick={() => setModal(true)} variant="secondary">
+                  Get early access
+                </Button>
+              </motion.div>
+            </Header.Content>
 
-        <FirstWave src={firstWave} />
-      </Header>
+            <Printscreen src={printscreen} />
+          </Container>
 
-      <Features />
-    </Content>
+          <FirstWave src={firstWave} />
+        </Header>
+
+        <Features />
+
+        <Faq />
+      </Content>
+    </>
   )
 }

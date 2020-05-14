@@ -73,21 +73,20 @@ export const Devices = () => {
 
   return (
     <Container width={width} height={height}>
-      {isValidUrl(url) &&
-        devices
-          .filter(({ isHidden }) => not(isHidden))
-          .map(({ name, width, height, userAgent, zoom, orientation }) => (
-            <Device
-              url={url}
-              name={name}
-              key={`${name}-${orientation}`}
-              width={equals(orientation, 'portrait') ? width : height}
-              zoom={zoom}
-              height={equals(orientation, 'portrait') ? height : width}
-              orientation={orientation}
-              userAgent={userAgent}
-            />
-          ))}
+      {devices
+        .filter(({ isHidden }) => not(isHidden))
+        .map(({ name, width, height, userAgent, zoom, orientation }) => (
+          <Device
+            url={url}
+            name={name}
+            key={`${name}-${orientation}`}
+            width={equals(orientation, 'portrait') ? width : height}
+            zoom={zoom}
+            height={equals(orientation, 'portrait') ? height : width}
+            orientation={orientation}
+            userAgent={userAgent}
+          />
+        ))}
 
       {not(isValidUrl(url)) && <Empty />}
     </Container>

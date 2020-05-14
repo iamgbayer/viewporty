@@ -21,11 +21,11 @@ function getXPathForElement(element) {
 }
 
 function getElementByXPath(path) {
-  return new XPathEvaluator().evaluate(
+  return document.evaluate(
     path,
     document,
     null,
-    XPathResult.FIRST_ORDERED_NODE_TYPE,
+    XPathResult.ANY_UNORDERED_NODE_TYPE,
     null
   ).singleNodeValue
 }
@@ -78,20 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ipcRenderer.on('toClick', (_, data) => {
     const target = getElementByXPath(data)
 
-    // console.log(data, target)
-
     if (isViewing) {
       return
     }
 
-    // !isViewing &&
-    window.setTimeout(() => {
-      // const event = document.createEvent('MouseEvents')
-      // event.initEvent('click', true, true)
-
-      // target && target.dispatchEvent(event)
-
-      target && target.click()
-    }, 0)
+    window.setTimeout(() => target && target.click(), 0)
   })
 })

@@ -28,7 +28,7 @@ const Inputable = styled.input`
   -moz-appearance: none;
   appearance: none;
   font-weight: ${theme('font.weight.regular')};
-  font-family: ${theme('font.family.primary')};
+  font-family: ${theme('font.family.one')};
   font-size: ${theme('font.size.fifteen')};
   cursor: ${ifProp('disabled', 'not-allowed', 'initial')};
 
@@ -90,13 +90,13 @@ const Inputable = styled.input`
 
 const Message = styled.span`
   margin-top: 5px;
-  font-family: ${theme('font.family.primary')};
+  font-family: ${theme('font.family.one')};
   font-size: ${theme('font.size.fourteen')};
   color: ${theme('colors.support.sixtiary')};
 `
 
 const Label = styled.label`
-  font-family: ${theme('font.family.primary')};
+  font-family: ${theme('font.family.one')};
   font-size: ${theme('font.size.fourteen')};
   color: ${theme('colors.support.quintiary')};
   margin-bottom: 5px;

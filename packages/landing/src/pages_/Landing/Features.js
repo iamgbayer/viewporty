@@ -20,6 +20,7 @@ const SecondWave = styled.img`
 export default function Features() {
   return (
     <Container>
+      sasasa
       <SecondWave src={secondWave} />
     </Container>
   )

@@ -30,7 +30,8 @@ export const Theme = {
       seven: 'rgba(68, 71, 90, 0.6)'
     },
     shadow: {
-      one: '0px 12px 19px rgba(60, 128, 209, 0.0851449)'
+      one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)',
+      two: '0px 10px 39px rgba(0,0,0,0.6)'
     }
   })
 }
