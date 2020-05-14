@@ -62,7 +62,7 @@
   "scripts": {
     "dev": "next-translate && next dev --port 4000",
     "build": "next-translate && next build",
-    "start": "next-translate && next start"
+    "start": "next-translate && next start --port 4000"
   },
   "eslintConfig": {
     "extends": "react-app"

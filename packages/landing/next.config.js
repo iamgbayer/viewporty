@@ -8,7 +8,6 @@ const PATH = require('./path')
 module.exports = withPlugins(
   [withFonts, withImages, withTM(['@responsivy/components'])],
   {
-    target: 'serverless',
     webpack: (config) => {
       config.resolve.alias['@'] = PATH.source
 
