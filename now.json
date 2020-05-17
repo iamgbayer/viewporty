@@ -2,7 +2,7 @@
   "version": 2,
   "alias": ["responsivy.com"],
   "github": {
-    "enabled": false
+    "enabled": true
   },
   "builds": [{ "src": "packages/landing/next.config.js", "use": "@now/next" }],
   "routes": [{ "src": "/(.*)", "dest": "/packages/landing/$1" }]
