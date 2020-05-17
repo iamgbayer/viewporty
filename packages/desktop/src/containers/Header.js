@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
 import { not, equals, isNil, indexOf } from 'ramda'
@@ -16,7 +16,7 @@ const Container = styled.div`
 `
 
 const Bar = styled.div`
-  -webkit-app-region: drag;
+  // -webkit-app-region: drag;
   position: fixed;
   width: 100%;
   height: 36px;
@@ -60,9 +60,15 @@ export const Header = ({ children }) => {
   const { url, urls } = useStoreState(({ history }) => history)
   const { setUrl } = useStoreActions(({ history }) => history)
   const [local, setLocal] = useState(url)
+  const addressRef = useRef()
 
   const navigate = ({ key }) => {
     if (not(equals(key, 'Enter'))) {
+      return
+    }
+
+    if (not(local)) {
+      setUrl('')
       return
     }
 
@@ -115,7 +121,9 @@ export const Header = ({ children }) => {
           </Controls>
 
           <Address
+            ref={addressRef}
             placeholder="Type an URL"
+            onClick={() => addressRef.current.select()}
             onKeyPress={navigate}
             value={local}
             onChange={({ target }) => setLocal(target.value)}

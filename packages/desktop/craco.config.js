@@ -31,7 +31,7 @@ module.exports = {
           '@/containers': './src/containers',
           '@/screens': './src/screens',
           '@/assets': './src/assets',
-          '@/utils': './src/utils',
+          '@/helpers': './src/helpers',
           '@/__mocks__': './src/__mocks__',
           '@/store': './src/store',
           '@/emitter': './src/emitter',

@@ -6,11 +6,12 @@ import { useTranslation } from 'next-translate'
 import Link from 'next-translate/Link'
 import media from 'styled-media-query'
 import { lte } from 'ramda'
+import Player from 'react-player'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 
 import firstWave from '@/assets/images/firstWave.svg'
-import printscreen from '@/assets/images/printscreen.png'
+import video from '@/assets/images/video.mp4'
 
 import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
@@ -177,12 +178,14 @@ const Hamburguer = styled(Icon)`
   `};
 `
 
-const Printscreen = styled.img`
-  border-radius: ${theme('border.radius.two')};
+const Video = styled(Player)`
+  border-radius: ${theme('border.radius.four')};
   box-shadow: ${theme('shadow.two')};
   margin-top: 150px;
   max-width: 1080px;
   width: 100%;
+  display: flex;
+  overflow: hidden;
 `
 
 const validationSchema = Yup.object().shape({
@@ -335,7 +338,7 @@ export default function Landing() {
             >
               <motion.div variants={enterWithY(200)}>
                 <Title weight="bold">
-                  Creating responsive has never been easier.
+                  Making responsive has never been easier.
                 </Title>
               </motion.div>
 
@@ -359,7 +362,14 @@ export default function Landing() {
               </motion.div>
             </Header.Content>
 
-            <Printscreen src={printscreen} />
+            <Video
+              url={video}
+              width="100%"
+              height="100%"
+              loop={true}
+              playing={true}
+              muted
+            />
           </Container>
 
           <FirstWave src={firstWave} />

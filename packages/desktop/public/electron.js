@@ -33,7 +33,7 @@ const createWindow = () => {
 
   main.loadURL(
     isDev
-      ? 'http://localhost:3000'
+      ? 'http://localhost:3006'
       : `file://${path.join(__dirname, '../build/index.html')}`
   )
 

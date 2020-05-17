@@ -13,6 +13,10 @@ import { Header, Sidebar } from '@/containers'
 import { Modal, Text, Icon } from '@responsivy/components'
 import { theme } from 'styled-tools'
 
+const Description = styled.div`
+  display: flex;
+`
+
 const Organizable = ({ name, move, index, width, height, isHidden }) => {
   const { colors } = useContext(ThemeContext)
   const { toggleVisibility } = useStoreActions(({ devices }) => devices)
@@ -77,12 +81,14 @@ const Organizable = ({ name, move, index, width, height, isHidden }) => {
         right={15}
       />
 
-      <div>
-        <Text color={colors.three}>{name}</Text>
+      <Description>
+        <Text color={colors.three} right={10}>
+          {name}
+        </Text>
         <Text color={colors.five} size="thirteen">
           ({width} x {height})
         </Text>
-      </div>
+      </Description>
     </Organizable.Container>
   )
 }

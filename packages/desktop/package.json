@@ -36,12 +36,32 @@
     "typescript": "~3.7.2"
   },
   "build": {
-    "appId": "<com.your_app>"
+    "appId": "com.responsivy",
+    "productName": "Responsivy",
+    "directories": {
+      "buildResources": "assets",
+      "output": "build"
+    },
+    "win": {
+      "icon": "icons/icon.ico",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "linux": {
+      "desktop": {
+        "MimeType": "x-scheme-handler/responsivy;"
+      },
+      "icon": "icons/icon.png",
+      "target": [
+        {
+          "target": "AppImage"
+        }
+      ]
+    }
   },
   "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
-    "start": "concurrently \"cross-env BROWSER=none craco start\" \"wait-on http://localhost:3000 && electron .\"",
+    "start": "concurrently \"cross-env PORT=3006 BROWSER=none craco start\" \"wait-on http://localhost:3006 && electron .\"",
     "build": "craco build && yarn electron-builder",
     "package": "yarn build && electron-builder build -mwl",
     "release": "craco build && electron-builder --publish=always",

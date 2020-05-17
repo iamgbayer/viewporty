@@ -5,7 +5,7 @@ import { not, equals } from 'ramda'
 import { theme, prop } from 'styled-tools'
 
 import { Device } from '@/components'
-import { isValidUrl } from '@/utils'
+import { isValidUrl } from '@/helpers'
 
 const Container = styled.div`
   width: ${prop('width')}px;
@@ -14,10 +14,13 @@ const Container = styled.div`
   padding: 40px;
   position: absolute;
   top: 36px;
+  display: flex;
+  flex-wrap: ${prop('align')};
 
   ::-webkit-scrollbar {
     background: transparent;
     width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar * {
@@ -33,6 +36,10 @@ const Container = styled.div`
     border-radius: 10px;
     background-color: ${theme('colors.one')};
   }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 `
 
 const Empty = styled.div`
@@ -41,7 +48,12 @@ const Empty = styled.div`
 `
 
 export const Devices = () => {
-  const getWidth = () => window.innerWidth - 190
+  const { scale, isMenuCollapsed, align } = useStoreState(
+    ({ config }) => config
+  )
+  const getMenuWidth = () => (isMenuCollapsed ? 40 : 190)
+
+  const getWidth = () => window.innerWidth - getMenuWidth()
   const getHeight = () => window.innerHeight - 36
 
   const [sizes, setSizes] = useState({
@@ -57,38 +69,43 @@ export const Devices = () => {
     equals
   )
 
-  const onResize = () =>
+  const whenNeedsSetSizes = () =>
     setSizes({
       width: getWidth(),
       height: getHeight()
     })
 
   useEffect(() => {
-    window.addEventListener('resize', onResize)
+    window.addEventListener('resize', whenNeedsSetSizes)
 
-    return () => window.removeEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', whenNeedsSetSizes)
   }, [])
+
+  useEffect(() => {
+    whenNeedsSetSizes()
+  }, [isMenuCollapsed])
 
   const { width, height } = sizes
 
   return (
-    <Container width={width} height={height}>
-      {devices
-        .filter(({ isHidden }) => not(isHidden))
-        .map(({ name, width, height, userAgent, zoom, orientation }) => (
-          <Device
-            url={url}
-            name={name}
-            key={`${name}-${orientation}`}
-            width={equals(orientation, 'portrait') ? width : height}
-            zoom={zoom}
-            height={equals(orientation, 'portrait') ? height : width}
-            orientation={orientation}
-            userAgent={userAgent}
-          />
-        ))}
+    <Container width={width} height={height} align={align}>
+      {url &&
+        devices
+          .filter(({ isHidden }) => not(isHidden))
+          .map(({ name, width, height, userAgent, orientation }) => (
+            <Device
+              url={url}
+              name={name}
+              key={`${name}-${orientation}`}
+              width={equals(orientation, 'portrait') ? width : height}
+              height={equals(orientation, 'portrait') ? height : width}
+              scale={scale}
+              orientation={orientation}
+              userAgent={userAgent}
+            />
+          ))}
 
-      {not(isValidUrl(url)) && <Empty />}
+      {not(url) && <Empty />}
     </Container>
   )
 }

@@ -5,25 +5,25 @@ import { isNil, not, equals } from 'ramda'
 import { useStoreActions } from 'easy-peasy'
 
 import { Text } from '@responsivy/components'
-
 import { once, removeListener, EVENTS } from '@/emitter'
+import { percentage } from '../helpers'
 
 const { remote } = window.require('electron')
 
 const Container = styled.div`
-  float: left;
   display: inline-block;
-  margin-right: 35px;
-  margin-bottom: 35px;
+  margin-right: calc(-${prop('right')}px + 40px);
+  margin-bottom: calc(-${prop('bottom')}px + 40px);
 `
 
 const Display = styled.div`
+  transform: scale(${prop('scale')});
+  transform-origin: 0 0;
+  width: ${prop('width')}px;
   box-shadow: ${theme('shadow.one')};
 
   & > webview {
-    width: ${prop('width')}px;
     height: ${prop('height')}px;
-    display: flex;
   }
 `
 
@@ -31,7 +31,7 @@ const Controls = styled.div`
   margin-bottom: 5px;
 `
 
-const Zoom = styled.span`
+const Scale = styled.span`
   cursor: pointer;
 
   &:hover {
@@ -39,65 +39,70 @@ const Zoom = styled.span`
   }
 `
 
-export const Device = memo(
-  ({ url, name, width, height, userAgent, zoom, orientation }) => {
-    const ref = useRef()
-    const { setUrl } = useStoreActions(({ history }) => history)
-    const { colors } = useContext(ThemeContext)
+export const Device = memo(({ url, name, width, height, userAgent, scale }) => {
+  const ref = useRef()
+  const { setUrl } = useStoreActions(({ history }) => history)
+  const { colors } = useContext(ThemeContext)
 
-    useEffect(() => {
-      const webview = ref.current
+  useEffect(() => {
+    const webview = ref.current
 
-      if (isNil(webview)) {
-        return
-      }
+    if (isNil(webview)) {
+      return
+    }
 
-      webview.addEventListener('dom-ready', () => {
-        const { webContents } = webview.getWebContents()
-        // webview.openDevTools()
+    webview.addEventListener('dom-ready', () => {
+      const { webContents } = webview.getWebContents()
+      // webview.openDevTools()
 
-        once(EVENTS.reload, (url) => webContents.loadURL(url))
+      // console.log(webview.getZoomLevel(always(console.log)))
 
-        webContents.enableDeviceEmulation({
-          screenPosition: 'mobile',
-          screenSize: {
-            width,
-            height
-          },
-          viewSize: {
-            width,
-            height
-          }
-        })
+      once(EVENTS.reload, (url) => webContents.loadURL(url))
 
-        webview.addEventListener(
-          'will-navigate',
-          (event) => not(equals(event.url, url)) && setUrl(event.url)
-        )
+      webContents.enableDeviceEmulation({
+        screenPosition: 'mobile'
+        // scale: 1,
+        // deviceScaleFactor: 2,
+        // screenSize: {
+        //   width: parseInt(width),
+        //   height: parseInt(height)
+        // },
+        // viewSize: {
+        //   width: parseInt(width),
+        //   height: parseInt(height)
+        // }
       })
 
-      return () => removeListener(EVENTS.reload)
-    }, [])
+      webview.addEventListener(
+        'will-navigate',
+        (event) => not(equals(event.url, url)) && setUrl(event.url)
+      )
+    })
 
-    return (
-      <Container>
-        <Controls>
-          <Text color={colors.three}>{name}</Text>
-          <Text color={colors.five} size="thirteen">
-            ({width} x {height}) <Zoom>{zoom}%</Zoom>
-          </Text>
-        </Controls>
+    return () => removeListener(EVENTS.reload)
+  }, [])
 
-        <Display width={width} height={height}>
-          <webview
-            id="webview"
-            useragent={userAgent}
-            ref={ref}
-            src={url}
-            preload={`file://${remote.app.getAppPath()}/public/preload.js`}
-          />
-        </Display>
-      </Container>
-    )
-  }
-)
+  return (
+    <Container
+      bottom={height - percentage(scale, height)}
+      right={width - percentage(scale, width)}
+    >
+      <Controls>
+        <Text color={colors.three}>{name}</Text>
+        <Text color={colors.five} size="thirteen">
+          ({width} x {height}) <Scale>{scale}%</Scale>
+        </Text>
+      </Controls>
+
+      <Display width={width} height={height} scale={scale / 100}>
+        <webview
+          id="webview"
+          useragent={userAgent}
+          ref={ref}
+          src={url}
+          preload={`file://${remote.app.getAppPath()}/public/preload.js`}
+        />
+      </Display>
+    </Container>
+  )
+})
