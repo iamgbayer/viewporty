@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { theme } from 'styled-tools'
 import media from 'styled-media-query'
 
-import { Text } from '@responsivy/components'
+import { Text, Icon } from '@responsivy/components'
 
 import secondWave from '@/assets/images/secondWave.svg'
 
@@ -33,7 +33,13 @@ const Title = styled(Text)`
 export default function Features() {
   return (
     <Container>
-      <Title weight="bold">What we have?</Title>
+      <Title weight="bold">What do we have?</Title>
+      {/* 
+      <Icon name="syncedDevices" width={180} height={180} />
+      <Text>All devices synced</Text>
+
+      <Icon name="organizeDevices" width={200} height={200} />
+      <Text>All devices synced</Text> */}
 
       <SecondWave src={secondWave} />
     </Container>
