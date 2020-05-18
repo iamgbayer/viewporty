@@ -9,6 +9,30 @@ import HKGroteskLight from '@/assets/fonts/HKGrotesk-Light.otf'
 export const Fonts = createGlobalStyle`
   body {
     background-color: ${theme('colors.one')};
+
+    ::-webkit-scrollbar {
+      background: transparent;
+      width: 6px;
+      height: 6px;
+    }
+  
+    ::-webkit-scrollbar * {
+      background: transparent;
+    }
+  
+    ::-webkit-scrollbar-track {
+      border: solid transparent;
+      background: transparent;
+    }
+  
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: ${theme('colors.ten')};
+    }
+  
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
   }
 
   @font-face {

@@ -11,7 +11,7 @@ export const Theme = {
       one: '#282C34',
       two: '#1A1D21',
       three: '#fff',
-      four: '#5468FF',
+      four: '#3D56F0',
       five: '#6E7279',
       seven: 'rgba(68, 71, 90, 0.6)',
       six: '#44475A'
@@ -26,9 +26,11 @@ export const Theme = {
       one: '#fff',
       two: '#F3F5F9',
       three: '#344356',
-      four: '#5468FF',
+      four: '#3D56F0',
       seven: 'rgba(68, 71, 90, 0.6)',
-      eight: '#607B9E'
+      eight: '#607B9E',
+      nine: '#5468FF',
+      ten: '#E1EBFC'
     },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)',

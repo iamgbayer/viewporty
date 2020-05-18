@@ -46,6 +46,7 @@ const Feature = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 
 Feature.Description = styled(Text)`
@@ -153,9 +154,7 @@ export default function Features() {
               animation={<Animations />}
               width={50}
               title="Organize your devices"
-              description="All devices synced Lorem Ipsum is not simply random text. It has
-              roots in a piece of classical Latin literature from 45 BC, making
-              it over 2000 years old."
+              description="Reorder, hide, and create devices with custom dimensions, user agent, etc."
             />
 
             {/* <Animations />

@@ -22,7 +22,6 @@ import Features from './Features'
 import Faq from './Faq'
 
 const Container = styled.div`
-  max-width: 960px;
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -80,6 +79,7 @@ const Header = styled.div`
 `
 
 Header.Content = styled(motion.div)`
+  max-width: 960px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -116,6 +116,7 @@ const Logo = styled(Icon)`
 `
 
 const Nav = styled(Container)`
+  max-width: 960px;
   display: flex;
   flex-direction: row;
   align-items: center;

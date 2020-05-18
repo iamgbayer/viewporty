@@ -31,8 +31,8 @@ const Container = styled(Box)`
 
   &:hover {
     background-color: ${switchProp('variant', {
-      secondary: theme('colors.support.tertiary'),
-      primary: theme('colors.support.quartiary')
+      primary: theme('colors.support.quartiary'),
+      secondary: theme('colors.nine')
     })};
   }
 `
