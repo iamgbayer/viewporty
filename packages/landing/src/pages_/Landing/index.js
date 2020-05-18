@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useState, useEffect, useContext } from 'react'
+import styled, { css, ThemeContext } from 'styled-components'
 import { theme, ifProp } from 'styled-tools'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'next-translate'
@@ -160,7 +160,7 @@ const Menu = styled.div`
     a,
     .navigable {
       color: ${theme('colors.one')};
-      font-size: ${theme('font.size.nineteen')}
+      font-size: ${theme('font.size.eighteen')}
     }
   `}
 `
@@ -199,6 +199,7 @@ const initialValues = {
 }
 
 export default function Landing() {
+  const { colors } = useContext(ThemeContext)
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(true)
   const [modal, setModal] = useState(false)
@@ -344,8 +345,9 @@ export default function Landing() {
 
               <motion.div variants={enterWithY(200)}>
                 <Description
-                  size="nineteen"
+                  size="eighteen"
                   weight="light"
+                  color={colors.eight}
                   height={22}
                   top={30}
                   bottom={40}

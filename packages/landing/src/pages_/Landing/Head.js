@@ -2,6 +2,8 @@ import React from 'react'
 import Headable from 'next/head'
 import { useTranslation } from 'next-translate'
 
+import favicon from '@/assets/images/favicon.ico'
+
 export default function Head() {
   const { t } = useTranslation()
 
@@ -15,6 +17,9 @@ export default function Head() {
       <meta property="og:type" content="product" />
       <meta property="og:site_name" content="Responsivy" />
       <meta property="og:title" content={t('translation:landing.meta.title')} />
+
+      <link rel="shortcut icon" href={favicon} type="image/x-icon" />
+      <link rel="icon" href={favicon} type="image/x-icon" />
 
       <meta
         property="og:description"

@@ -27,7 +27,8 @@ export const Theme = {
       two: '#F3F5F9',
       three: '#344356',
       four: '#5468FF',
-      seven: 'rgba(68, 71, 90, 0.6)'
+      seven: 'rgba(68, 71, 90, 0.6)',
+      eight: '#607B9E'
     },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)',

@@ -17,6 +17,7 @@ const transition = {
 }
 
 export const SyncedDevices = ({ width, height, color }) => {
+  console.log(color)
   return (
     <svg
       width={width}
@@ -47,7 +48,7 @@ export const SyncedDevices = ({ width, height, color }) => {
         <path
           d="M11 2H1C0.447715 2 0 2.39797 0 2.88889V17.1111C0 17.602 0.447715 18 1 18H11C11.5523 18 12 17.602 12 17.1111V2.88889C12 2.39797 11.5523 2 11 2Z"
           stroke={color}
-          strokeWidth="2.5"
+          strokeWidth="2"
         />
         <GroupAnimated animate={smallDeviceAnimation} transition={transition}>
           <rect x="3" y="5" width="6" height="1" fill={color} />
@@ -79,7 +80,7 @@ export const SyncedDevices = ({ width, height, color }) => {
         <path
           d="M31.5 0H16.5C15.6716 0 15 0.596954 15 1.33333V22.6667C15 23.403 15.6716 24 16.5 24H31.5C32.3284 24 33 23.403 33 22.6667V1.33333C33 0.596954 32.3284 0 31.5 0Z"
           stroke={color}
-          strokeWidth="2.5"
+          strokeWidth="2"
         />
         <GroupAnimated animate={largeDeviceAnimation} transition={transition}>
           <rect x="18" y="4" width="12" height="1" fill={color} />

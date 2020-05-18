@@ -35,7 +35,9 @@ export const Icon = memo(
           {...props}
           width={width}
           height={height}
-          color={color || equals(theme, 'dark') ? colors.five : colors.three}
+          color={
+            color ? color : equals(theme, 'dark') ? colors.five : colors.three
+          }
         />
       </Container>
     )

@@ -21,8 +21,10 @@ export const Tokens = {
       thirteen: '13px',
       fourteen: '14px',
       fifteen: '15px',
-      nineteen: '19px',
+      eighteen: '18px',
+      twenty: '20px',
       twentyFour: '24px',
+      forty: '40px',
       fortyFive: '45px'
     },
     weight: {
