@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, memo } from 'react'
 import styled, { css, ThemeContext } from 'styled-components'
 import { theme, ifProp } from 'styled-tools'
 import { motion } from 'framer-motion'
@@ -33,35 +33,16 @@ const Container = styled.div`
 
   ${media.lessThan('large')`
     padding: 0 15px;
+    padding-top: 20px;
   `};
 `
 
 const Description = styled(Text)`
   max-width: 500px;
-
-  ${ifProp(
-    { center: true },
-    css`
-      text-align: center;
-    `
-  )}
-
-  ${media.lessThan('small')`
-    text-align: center;
-  `}
 `
 
 const Title = styled(Text)`
   max-width: 630px;
-  font-size: ${theme('font.size.fortyFive')};
-
-  ${media.greaterThan('medium')`
-    font-size: ${theme('font.size.sixty')};
-  `}
-
-  ${media.lessThan('small')`
-    text-align: center;
-  `}
 `
 
 const Header = styled.div`
@@ -122,10 +103,6 @@ const Nav = styled(Container)`
   align-items: center;
   justify-content: space-between;
   padding-top: 20px;
-
-  ${media.lessThan('medium')`
-    padding-top: 40px;
-  `}
 `
 
 const Menu = styled.div`
@@ -247,7 +224,7 @@ export default function Landing() {
             message: errors.email
           }}
           value={email}
-          bottom={10}
+          marginBottom={10}
         />
 
         <Input
@@ -262,15 +239,10 @@ export default function Landing() {
           }}
           onChange={handleChange}
           value={password}
-          bottom={10}
+          marginBottom={35}
         />
 
-        <Button
-          full={true}
-          top={30}
-          onClick={getEarlyAccessAccount}
-          variant="secondary"
-        >
+        <Button full={true} onClick={getEarlyAccessAccount} variant="secondary">
           Get early access
         </Button>
       </Modal>
@@ -279,7 +251,12 @@ export default function Landing() {
         <Head />
 
         <Nav>
-          <Logo onClick={() => {}} width={250} height={75} name="logo" />
+          <Logo
+            onClick={() => {}}
+            width={[160, 250]}
+            height={[50, 75]}
+            name="logo"
+          />
 
           {isMobile && (
             <Hamburguer
@@ -339,19 +316,19 @@ export default function Landing() {
               }}
             >
               <motion.div variants={enterWithY(200)}>
-                <Title weight="bold">
+                <Title fontSize={[5, 7]} fontWeight={3}>
                   Making responsive has never been easier.
                 </Title>
               </motion.div>
 
               <motion.div variants={enterWithY(200)}>
                 <Description
-                  size="eighteen"
-                  weight="light"
+                  fontSize={3}
+                  fontWeight={300}
                   color={colors.eight}
-                  height={22}
-                  top={30}
-                  bottom={40}
+                  lineHeight="22px"
+                  marginTop={30}
+                  marginBottom={40}
                 >
                   Spend half the time designing and developing responsive
                   websites by testing them on multiple screens at once.

@@ -4,10 +4,10 @@ import { theme, ifProp } from 'styled-tools'
 import media from 'styled-media-query'
 import { motion } from 'framer-motion'
 
-import { Text, Icon } from '@responsivy/components'
+import { Text } from '@responsivy/components'
 
 import secondWave from '@/assets/images/secondWave.svg'
-import { Animations } from '@/components'
+import { Animations, Hidden } from '@/components'
 
 const Container = styled.div`
   width: 100%;
@@ -24,7 +24,6 @@ const SecondWave = styled.img`
 `
 
 const Title = styled(Text)`
-  font-size: ${theme('font.size.fortyFive')};
   text-align: center;
 
   ${media.greaterThan('medium')`
@@ -49,10 +48,6 @@ const Feature = styled.div`
   justify-content: center;
 `
 
-Feature.Description = styled(Text)`
-  line-height: 25px;
-`
-
 const Card = ({
   justifyLeft = false,
   title,
@@ -64,36 +59,27 @@ const Card = ({
 
   return (
     <Card.Container hasMargin={hasMargin}>
-      <>{justifyLeft && <>{animation}</>}</>
+      <>{justifyLeft && <Hidden lessThan="large">{animation}</Hidden>}</>
 
       <Card.Content justifyLeft={justifyLeft}>
-        <Card.Title className="title" size="forty" weight="bold">
+        <Text fontSize={6} fontWeight={3} marginBottom={[10, 30]}>
           {title}
-        </Card.Title>
+        </Text>
 
-        <Card.Description weight="light" color={colors.eight} size="eighteen">
+        <Text
+          fontWeight={300}
+          color={colors.eight}
+          fontSize={3}
+          lineHeight="25px"
+        >
           {description}
-        </Card.Description>
+        </Text>
       </Card.Content>
 
-      <>{!justifyLeft && <>{animation}</>}</>
+      <>{!justifyLeft && <Hidden lessThan="large">{animation}</Hidden>}</>
     </Card.Container>
   )
 }
-
-Card.Title = styled(Text)`
-  ${media.lessThan('lg')`
-    font-size: ${theme('font.size.twenty')};
-  `}
-`
-
-Card.Description = styled(Text)`
-  line-height: 25px;
-
-  ${media.lessThan('lg')`
-    font-size: ${theme('font.size.twelve')};
-  `}
-`
 
 Card.Container = styled(motion.div)`
   display: flex;
@@ -113,11 +99,7 @@ Card.Content = styled(motion.div)`
   width: 100%;
   max-width: 380px;
 
-  .title {
-    margin-bottom: 30px;
-  }
-
-  ${media.lessThan('lg')`
+  ${media.lessThan('large')`
     ${ifProp(
       { justifyLeft: true },
       css`
@@ -128,12 +110,10 @@ Card.Content = styled(motion.div)`
       `
     )}
 
-    .title {
-      margin-bottom: 10px;
-    }
+   
   `}
 
-  ${media.lessThan('sm')`
+  ${media.lessThan('small')`
     text-align: center;
     max-width: 100%;
     padding: 0;
@@ -145,7 +125,7 @@ export default function Features() {
     <>
       <Container>
         <Content>
-          <Title weight="bold" bottom={60}>
+          <Title fontSize={7} fontWeight={3} marginBottom={60}>
             What we have
           </Title>
 
@@ -156,18 +136,6 @@ export default function Features() {
               title="Organize your devices"
               description="Reorder, hide, and create devices with custom dimensions, user agent, etc."
             />
-
-            {/* <Animations />
-
-            <Feature.Description
-              size="eighteen"
-              weight="light"
-              color={colors.eight}
-            >
-              All devices synced Lorem Ipsum is not simply random text. It has
-              roots in a piece of classical Latin literature from 45 BC, making
-              it over 2000 years old.
-            </Feature.Description> */}
           </Feature>
         </Content>
 

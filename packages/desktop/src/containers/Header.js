@@ -96,8 +96,8 @@ export const Header = ({ children }) => {
               width={15}
               height={15}
               color={colors.five}
-              left={15}
-              right={15}
+              marginLeft={15}
+              marginRight={15}
               onClick={() => getPreviousUrl() && setUrl(getPreviousUrl())}
             />
 
@@ -106,7 +106,7 @@ export const Header = ({ children }) => {
               width={15}
               height={15}
               color={colors.five}
-              right={15}
+              marginRight={15}
               onClick={() => getNextUrl() && setUrl(getNextUrl())}
             />
 
@@ -116,7 +116,7 @@ export const Header = ({ children }) => {
               height={17}
               color={colors.five}
               onClick={() => emit(EVENTS.reload, url)}
-              right={15}
+              marginRight={15}
             />
           </Controls>
 

@@ -10,11 +10,12 @@ export const Theme = {
     colors: {
       one: '#282C34',
       two: '#1A1D21',
-      three: '#fff',
+      three: '#fafafa',
       four: '#3D56F0',
-      five: '#6E7279',
+      five: '#aaa',
       seven: 'rgba(68, 71, 90, 0.6)',
-      six: '#44475A'
+      six: '#44475A',
+      twelve: '#E9E9E9'
     },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)'
@@ -23,14 +24,17 @@ export const Theme = {
   light: withTokens({
     theme: 'light',
     colors: {
-      one: '#fff',
+      one: '#fafafa',
       two: '#F3F5F9',
       three: '#344356',
       four: '#3D56F0',
       seven: 'rgba(68, 71, 90, 0.6)',
       eight: '#607B9E',
       nine: '#5468FF',
-      ten: '#E1EBFC'
+      ten: '#E1EBFC',
+      eleven: '#aaa',
+      twelve: '#E9E9E9',
+      thirteen: '#fff'
     },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)',

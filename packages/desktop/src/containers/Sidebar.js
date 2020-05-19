@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import styled, { ThemeContext, css } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import { theme, ifProp } from 'styled-tools'
+import { space } from 'styled-system'
 
 import { Icon, Text } from '@responsivy/components'
 import { useStoreActions, useStoreState } from 'easy-peasy'
@@ -27,7 +28,7 @@ const Separator = styled.div`
   width: 100%;
   height: 1px;
   background-color: ${theme('colors.six')};
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `
 
 const Option = ({
@@ -41,11 +42,15 @@ const Option = ({
   const { colors } = useContext(ThemeContext)
 
   return (
-    <Option.Container isCollapsed={isCollapsed} onClick={onClick}>
+    <Option.Container
+      isCollapsed={isCollapsed}
+      onClick={onClick}
+      marginBottom={15}
+    >
       <Icon name={icon} width={width} height={height} color={colors.five} />
 
       {not(isCollapsed) && (
-        <Text left={5} color={colors.five}>
+        <Text marginLeft="5px" color={colors.five}>
           {description}
         </Text>
       )}
@@ -54,16 +59,16 @@ const Option = ({
 }
 
 Option.Container = styled.div`
+  ${space}
   display: flex;
   cursor: pointer;
-  margin-bottom: 15px;
   align-items: center;
   justify-content: ${ifProp({ isCollapsed: true }, 'center', 'flex-start')};
 `
 
 const Subtitle = styled(Text)`
   text-transform: uppercase;
-  font-size: ${theme('font.size.thirteen')};
+  font-size: ${theme('font.size.fourteen')};
   color: ${theme('colors.five')};
   font-weight: ${theme('font.weight.medium')};
 `
@@ -90,10 +95,10 @@ export const Sidebar = ({ children }) => {
       <Bar isCollapsed={isMenuCollapsed}>
         {/* <div onClick={() => setMenuCollapsed(!isMenuCollapsed)}>collapse</div> */}
 
-        <Subtitle bottom={10}>Alignment</Subtitle>
+        <Subtitle marginBottom={10}>Alignment</Subtitle>
 
         <Group
-          bottom={15}
+          marginBottom={15}
           hasActiveId="wrap"
           orientation={isMenuCollapsed ? 'vertical' : 'horizontal'}
         >
@@ -131,7 +136,7 @@ export const Sidebar = ({ children }) => {
 
         <Separator />
 
-        <Subtitle bottom={10}>Zoom</Subtitle>
+        <Subtitle marginBottom={10}>Zoom</Subtitle>
 
         <Group
           hasActiveId="75"

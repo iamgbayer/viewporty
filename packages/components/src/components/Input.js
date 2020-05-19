@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import styled, { css, ThemeContext } from 'styled-components'
 import { ifProp, switchProp, theme } from 'styled-tools'
-
-import { Box } from './Box'
+import { space } from 'styled-system'
 
 const iconAlign = {
   left: 'left',
@@ -16,7 +15,8 @@ const typing = {
   email: 'email'
 }
 
-const Container = styled(Box)`
+const Container = styled.div`
+  ${space}
   width: ${ifProp({ full: true }, '100%', 'max-content')};
   display: flex;
   flex-direction: column;
@@ -25,11 +25,12 @@ const Container = styled(Box)`
 
 const Inputable = styled.input`
   -webkit-appearance: none;
+  border-radius: ${theme('border.radius.four')};
   -moz-appearance: none;
   appearance: none;
   font-weight: ${theme('font.weight.regular')};
   font-family: ${theme('font.family.one')};
-  font-size: ${theme('font.size.fifteen')};
+  font-size: ${theme('font.size.sixteen')};
   cursor: ${ifProp('disabled', 'not-allowed', 'initial')};
 
   height: ${switchProp('size', {
@@ -40,13 +41,10 @@ const Inputable = styled.input`
   color: ${ifProp(
     'hasError',
     theme('colors.support.sixtiary'),
-    theme('colors.support.quintiary')
+    theme('colors.eleven')
   )};
 
-  background-color: ${switchProp('variant', {
-    primary: theme('colors.quartiary'),
-    secondary: theme('colors.secondary')
-  })};
+  background-color: ${theme('colors.thirteen')};
 
   ${ifProp(
     { disabled: true },
@@ -56,13 +54,12 @@ const Inputable = styled.input`
   )}
 
   padding: 0 10px;
-  border-radius: ${theme('border.radius.five')};
 
   border: 1px solid
     ${ifProp(
       'hasError',
       theme('colors.support.sixtiary'),
-      theme('colors.support.secondary')
+      theme('colors.twelve')
     )};
 
   ${ifProp(
@@ -83,7 +80,7 @@ const Inputable = styled.input`
     color: ${ifProp(
       'hasError',
       theme('colors.support.sixtiary'),
-      theme('colors.support.quintiary')
+      theme('colors.eleven')
     )};
   }
 `
@@ -98,7 +95,7 @@ const Message = styled.span`
 const Label = styled.label`
   font-family: ${theme('font.family.one')};
   font-size: ${theme('font.size.fourteen')};
-  color: ${theme('colors.support.quintiary')};
+  color: ${theme('colors.eleven')};
   margin-bottom: 5px;
 `
 

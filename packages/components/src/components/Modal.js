@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
 import PropTypes from 'prop-types'
+import media from 'styled-media-query'
 
 import { Closeable } from './Closeable'
 import { Icon } from './Icon'
@@ -27,6 +28,10 @@ const Content = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+
+  ${media.lessThan('medium')`
+    width: calc(100% - 30px);
+  `}
 `
 
 const Close = styled(Icon)`

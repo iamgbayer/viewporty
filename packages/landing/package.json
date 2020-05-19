@@ -20,6 +20,7 @@
     "firebase": "^7.14.3",
     "next-translate": "^0.14.1",
     "react": "^16.13.1",
+    "styled-system": "^5.1.5",
     "react-dom": "^16.13.1",
     "react-gtm-module": "^2.0.8",
     "react-intersection-observer": "^8.26.1",

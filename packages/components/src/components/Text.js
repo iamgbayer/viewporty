@@ -1,51 +1,28 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
-import { theme, prop, ifProp } from 'styled-tools'
+import { ifNotProp, theme } from 'styled-tools'
+import {
+  fontSize,
+  fontWeight,
+  color,
+  lineHeight,
+  textAlign,
+  space
+} from 'styled-system'
 
-import { Tokens } from './Tokens'
-import { Box } from './Box'
-
-const { font } = Tokens
-
-const Texteable = styled.span`
+export const Text = styled.span`
   font-family: ${theme('font.family.one')};
-  font-weight: ${prop('weight')};
-  font-size: ${prop('size')};
-  color: ${ifProp('color', prop('color'), theme('colors.three'))};
+  display: flex;
+  ${fontSize}
+  ${fontWeight}
+  ${color}
+  ${lineHeight}
+  ${textAlign}
+  ${space}
 
-  ${ifProp(
-    'height',
+  ${ifNotProp(
+    'color',
     css`
-      line-height: ${prop('height')}px;
-    `
-  )};
-  ${ifProp(
-    { align: 'center' },
-    css`
-      text-align: center;
+      color: ${theme('colors.three')};
     `
   )}
 `
-
-export function Text({
-  weight = 'regular',
-  size = 'fifteen',
-  color,
-  children,
-  height,
-  ...props
-}) {
-  return (
-    <Box {...props}>
-      <Texteable
-        {...props}
-        height={height}
-        color={color}
-        size={font.size[size]}
-        weight={font.weight[weight]}
-      >
-        {children}
-      </Texteable>
-    </Box>
-  )
-}

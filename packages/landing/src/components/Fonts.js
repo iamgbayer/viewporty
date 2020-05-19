@@ -27,7 +27,7 @@ export const Fonts = createGlobalStyle`
   
     ::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: ${theme('colors.ten')};
+      background-color: ${theme('colors.two')};
     }
   
     ::-webkit-scrollbar-corner {

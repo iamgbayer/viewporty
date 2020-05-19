@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { theme } from 'styled-tools'
+import { width, height } from 'styled-system'
 
 const Container = styled.div`
   .st0 {
@@ -27,10 +28,15 @@ const Container = styled.div`
   }
 `
 
+const Svg = styled.svg`
+  ${width}
+  ${height}
+`
+
 export function Logo({ width, height }) {
   return (
     <Container>
-      <svg
+      <Svg
         width={width}
         height={height}
         version="1.1"
@@ -69,7 +75,7 @@ export function Logo({ width, height }) {
 	 M171,360.3h7.7v-31.7H171V360.3z M196.5,360.3h6.4l12.9-31.7h-8.4l-7.7,21.7l-7.7-21.7h-8.5L196.5,360.3z M223,373.9h8.4l18.1-45.4
 	h-8.5l-8.1,22l-8-22h-8.5l12.4,30.9L223,373.9z"
         />
-      </svg>
+      </Svg>
     </Container>
   )
 }

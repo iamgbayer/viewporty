@@ -1,4 +1,8 @@
 export const Tokens = {
+  breakpoints: ['450px', '768px', '1170px', '1440px'],
+  fontSizes: ['11px', '14px', '16px', '18px', '20px', '24px', '40px', '44px'],
+  fontWeights: [300, 400, 600, 800],
+  spaces: [],
   border: {
     radius: {
       two: '2px',
@@ -18,14 +22,13 @@ export const Tokens = {
     },
     size: {
       eleven: '11px',
-      thirteen: '13px',
       fourteen: '14px',
-      fifteen: '15px',
+      sixteen: '16px',
       eighteen: '18px',
       twenty: '20px',
       twentyFour: '24px',
       forty: '40px',
-      fortyFive: '45px'
+      fortyFour: '44px'
     },
     weight: {
       bold: 800,

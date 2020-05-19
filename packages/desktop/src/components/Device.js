@@ -32,6 +32,7 @@ const Controls = styled.div`
 `
 
 const Scale = styled.span`
+  margin-left: 5px;
   cursor: pointer;
 
   &:hover {
@@ -88,8 +89,10 @@ export const Device = memo(({ url, name, width, height, userAgent, scale }) => {
       right={width - percentage(scale, width)}
     >
       <Controls>
-        <Text color={colors.three}>{name}</Text>
-        <Text color={colors.five} size="thirteen">
+        <Text color={colors.three} fontSize={1} marginBottom="5px">
+          {name}
+        </Text>
+        <Text color={colors.five} fontSize={0}>
           ({width} x {height}) <Scale>{scale}%</Scale>
         </Text>
       </Controls>

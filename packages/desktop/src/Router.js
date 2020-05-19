@@ -78,14 +78,14 @@ const Organizable = ({ name, move, index, width, height, isHidden }) => {
         color={colors.three}
         width={20}
         height={20}
-        right={15}
+        marginRight={15}
       />
 
       <Description>
-        <Text color={colors.three} right={10}>
+        <Text color={colors.three} marginRight={10}>
           {name}
         </Text>
-        <Text color={colors.five} size="thirteen">
+        <Text color={colors.five} fontSize={1}>
           ({width} x {height})
         </Text>
       </Description>

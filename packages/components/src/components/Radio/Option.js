@@ -5,8 +5,6 @@ import { ifProp, switchProp, prop, theme } from 'styled-tools'
 
 import { Context } from './Context'
 
-import { Box } from '../Box'
-
 const Content = styled.div`
   display: inline-block;
   vertical-align: middle;
@@ -142,30 +140,28 @@ export function Option({ id, label, name, disabled, ...props }) {
     <Fragment>
       {/* eslint-disable-next-line no-prototype-builtins */}
       {checkable.hasOwnProperty(id) && (
-        <Box {...props}>
-          <Container size={size} htmlFor={id} labelAlign={labelAlign}>
-            <Content>
-              <Hidden
-                id={id}
-                checked={checkable[id]}
-                value={checkable[id]}
-                onChange={setChecked}
-                name={name}
-                disabled={disabled}
-              />
+        <Container size={size} htmlFor={id} labelAlign={labelAlign}>
+          <Content>
+            <Hidden
+              id={id}
+              checked={checkable[id]}
+              value={checkable[id]}
+              onChange={setChecked}
+              name={name}
+              disabled={disabled}
+            />
 
-              <Styled size={size} disabled={disabled} checked={checkable[id]}>
-                {(checkable[id] || disabled) && (
-                  <Icon disabled={disabled} size={size} />
-                )}
-              </Styled>
-            </Content>
+            <Styled size={size} disabled={disabled} checked={checkable[id]}>
+              {(checkable[id] || disabled) && (
+                <Icon disabled={disabled} size={size} />
+              )}
+            </Styled>
+          </Content>
 
-            <Label size={size} labelAlign={labelAlign}>
-              {label}
-            </Label>
-          </Container>
-        </Box>
+          <Label size={size} labelAlign={labelAlign}>
+            {label}
+          </Label>
+        </Container>
       )}
     </Fragment>
   )

@@ -3,12 +3,6 @@ import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { switchProp, ifProp, prop, theme } from 'styled-tools'
 
-import { Box as Boxeable } from '../Box'
-
-const Box = styled(Boxeable)`
-  display: flex;
-`
-
 const Content = styled.div`
   display: inline-block;
   vertical-align: middle;
@@ -132,30 +126,26 @@ const Label = styled.span`
 export const Checkbox = memo(
   ({ checked, label, onChange, id, disabled, labelAlign, size, ...props }) => {
     return (
-      <Box {...props}>
-        <Container htmlFor={id} labelAlign={labelAlign}>
-          <Content>
-            <Hidden
-              id={id}
-              checked={checked}
-              value={checked}
-              onChange={onChange}
-              disabled={disabled}
-              {...props}
-            />
+      <Container htmlFor={id} labelAlign={labelAlign}>
+        <Content>
+          <Hidden
+            id={id}
+            checked={checked}
+            value={checked}
+            onChange={onChange}
+            disabled={disabled}
+            {...props}
+          />
 
-            <Styled size={size} checked={checked} disabled={disabled}>
-              {(checked || disabled) && (
-                <Icon size={size} disabled={disabled} />
-              )}
-            </Styled>
-          </Content>
+          <Styled size={size} checked={checked} disabled={disabled}>
+            {(checked || disabled) && <Icon size={size} disabled={disabled} />}
+          </Styled>
+        </Content>
 
-          <Label labelAlign={labelAlign} size={size} disabled={disabled}>
-            {label}
-          </Label>
-        </Container>
-      </Box>
+        <Label labelAlign={labelAlign} size={size} disabled={disabled}>
+          {label}
+        </Label>
+      </Container>
     )
   }
 )

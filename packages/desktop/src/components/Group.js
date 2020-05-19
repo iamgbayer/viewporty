@@ -7,11 +7,13 @@ import React, {
 } from 'react'
 import styled, { ThemeContext, css } from 'styled-components'
 import { theme, switchProp, ifProp } from 'styled-tools'
+import { space } from 'styled-system'
 
-import { Text, Box } from '@responsivy/components'
+import { Text } from '@responsivy/components'
 import { equals } from 'ramda'
 
-const Container = styled(Box)`
+const Container = styled.div`
+  ${space}
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +77,7 @@ const Option = ({ id, className, onClick, children }) => {
 
   return (
     <Content id={id} className={className} onClick={onClick}>
-      <Text size="thirteen" color={colors.five}>
+      <Text fontSize="13px" color={colors.five}>
         {children}
       </Text>
     </Content>
@@ -138,7 +140,7 @@ export const Group = ({
   const aggregatedChildren = [firstChild, ...middle, lastChild]
 
   return (
-    <Container orientation={orientation} {...props}>
+    <Container {...props} orientation={orientation}>
       {aggregatedChildren}
     </Container>
   )

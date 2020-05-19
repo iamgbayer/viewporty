@@ -109,7 +109,7 @@ const Content = styled.div`
 
 const Title = styled.span`
   font-family: ${theme('font.family.primary')};
-  font-size: ${theme('font.size.fifteen')};
+  font-size: ${theme('font.size.sixteen')};
   color: ${theme('colors.support.quintiary')};
 `
 
