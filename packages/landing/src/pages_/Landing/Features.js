@@ -133,8 +133,8 @@ export default function Features() {
             <Card
               animation={<Animations />}
               width={50}
-              title="Organize your devices"
-              description="Reorder, hide, and create devices with custom dimensions, user agent, etc."
+              title="Organize your screens"
+              description="Reorder, hide, and create new screens with custom dimensions, user agent, etc. Also you can resize them."
             />
           </Feature>
         </Content>
