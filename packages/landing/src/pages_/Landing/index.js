@@ -109,6 +109,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: ${theme('zindex.two')};
 
   .navigable {
     margin-left: 15px;
