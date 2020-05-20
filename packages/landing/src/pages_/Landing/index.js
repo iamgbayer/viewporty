@@ -5,10 +5,11 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'next-translate'
 import Link from 'next-translate/Link'
 import media from 'styled-media-query'
-import { lte } from 'ramda'
+import { lte, equals, assoc } from 'ramda'
 import Player from 'react-player'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import { space, fontSize, fontWeight } from 'styled-system'
 
 import firstWave from '@/assets/images/firstWave.svg'
 import video from '@/assets/images/video.mp4'
@@ -16,6 +17,7 @@ import video from '@/assets/images/video.mp4'
 import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
 import { auth } from '@/config'
+import { Animation } from '@/components'
 
 import Head from './Head'
 import Features from './Features'
@@ -177,11 +179,26 @@ const initialValues = {
   password: ''
 }
 
+const initialModalState = {
+  isModalOpen: false,
+  content: 'form'
+}
+
+const Underlined = styled.a`
+  text-decoration: underline;
+`
+
+const EarlyAccessCreated = styled.span`
+  ${space}
+  ${fontSize}
+  ${fontWeight}
+`
+
 export default function Landing() {
   const { colors } = useContext(ThemeContext)
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(true)
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(initialModalState)
   const { t } = useTranslation()
 
   const { handleChange, values, isValid, errors, validateForm } = useFormik({
@@ -197,10 +214,11 @@ export default function Landing() {
   const getEarlyAccessAccount = () => {
     validateForm()
 
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(console.log)
-      .catch(console.log)
+    isValid &&
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => setModal(assoc('content', 'success')))
+        .catch(console.log)
   }
 
   useEffect(() => {
@@ -211,41 +229,81 @@ export default function Landing() {
     isMobile && setMenuOpen(false)
   }, [isMobile])
 
+  const { isModalOpen, content } = modal
+
   return (
     <>
-      <Modal isOpen={modal} close={() => setModal(false)}>
-        <Input
-          id="email"
-          full={true}
-          label="Email"
-          placeholder="john@doe.com"
-          onChange={handleChange}
-          error={{
-            has: !!errors.email,
-            message: errors.email
-          }}
-          value={email}
-          marginBottom={10}
-        />
+      <Modal isOpen={isModalOpen} close={() => setModal(initialModalState)}>
+        {equals(content, 'success') && (
+          <>
+            <Description>
+              <EarlyAccessCreated
+                fontSize={[4, 5]}
+                fontWeight={3}
+                marginBottom={30}
+              >
+                Your account for early access has been successfully created,
+                follow our{' '}
+                <Underlined
+                  href="https://twitter.com/responsivy"
+                  target="_blank"
+                >
+                  Twitter
+                </Underlined>{' '}
+                to receive updates!
+              </EarlyAccessCreated>
+            </Description>
 
-        <Input
-          type="password"
-          id="password"
-          full={true}
-          placeholder="••••••••"
-          label="Password"
-          error={{
-            has: !!errors.password,
-            message: errors.password
-          }}
-          onChange={handleChange}
-          value={password}
-          marginBottom={35}
-        />
+            <Button
+              full={true}
+              onClick={() => setModal(initialModalState)}
+              variant="secondary"
+            >
+              Close
+            </Button>
+          </>
+        )}
 
-        <Button full={true} onClick={getEarlyAccessAccount} variant="secondary">
-          Get early access
-        </Button>
+        {equals(content, 'form') && (
+          <>
+            <Input
+              id="email"
+              full={true}
+              label="Email"
+              placeholder="john@doe.com"
+              onChange={handleChange}
+              error={{
+                has: !!errors.email,
+                message: errors.email
+              }}
+              value={email}
+              marginBottom={10}
+            />
+
+            <Input
+              type="password"
+              id="password"
+              full={true}
+              placeholder="••••••••"
+              label="Password"
+              error={{
+                has: !!errors.password,
+                message: errors.password
+              }}
+              onChange={handleChange}
+              value={password}
+              marginBottom={35}
+            />
+
+            <Button
+              full={true}
+              onClick={getEarlyAccessAccount}
+              variant="secondary"
+            >
+              Get early access
+            </Button>
+          </>
+        )}
       </Modal>
 
       <Content>
@@ -337,7 +395,10 @@ export default function Landing() {
               </motion.div>
 
               <motion.div variants={enterWithY(200)}>
-                <Button onClick={() => setModal(true)} variant="secondary">
+                <Button
+                  onClick={() => setModal(assoc('isModalOpen', true))}
+                  variant="secondary"
+                >
                   Get early access
                 </Button>
               </motion.div>

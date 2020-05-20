@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { Text } from '@responsivy/components'
 
 import secondWave from '@/assets/images/secondWave.svg'
-import { Animations, Hidden } from '@/components'
+import { Animation, Hidden } from '@/components'
 
 const Container = styled.div`
   width: 100%;
@@ -131,7 +131,7 @@ export default function Features() {
 
           <Feature>
             <Card
-              animation={<Animations />}
+              animation={<Animation type="organize" />}
               width={50}
               title="Organize your screens"
               description="Reorder, hide, and create new screens with custom dimensions, user agent, etc. Also you can resize them."

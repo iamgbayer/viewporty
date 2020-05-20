@@ -15,7 +15,8 @@ export const Theme = {
       five: '#aaa',
       seven: 'rgba(68, 71, 90, 0.6)',
       six: '#44475A',
-      twelve: '#E9E9E9'
+      twelve: '#E9E9E9',
+      thirteen: '#fff'
     },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)'

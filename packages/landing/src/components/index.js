@@ -1,5 +1,5 @@
 export * from './Container'
 export * from './Content'
 export * from './Fonts'
-export * from './Animations'
+export * from './Animation'
 export * from './Hidden'

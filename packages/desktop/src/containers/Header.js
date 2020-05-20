@@ -16,7 +16,7 @@ const Container = styled.div`
 `
 
 const Bar = styled.div`
-  // -webkit-app-region: drag;
+  -webkit-app-region: drag;
   position: fixed;
   width: 100%;
   height: 36px;

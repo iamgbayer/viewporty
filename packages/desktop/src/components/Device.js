@@ -6,7 +6,7 @@ import { useStoreActions } from 'easy-peasy'
 
 import { Text } from '@responsivy/components'
 import { once, removeListener, EVENTS } from '@/emitter'
-import { percentage } from '../helpers'
+import { percentage } from '@/helpers'
 
 const { remote } = window.require('electron')
 
@@ -23,6 +23,7 @@ const Display = styled.div`
   box-shadow: ${theme('shadow.one')};
 
   & > webview {
+    background-color: ${theme('colors.thirteen')};
     height: ${prop('height')}px;
   }
 `

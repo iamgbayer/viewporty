@@ -1,6 +1,6 @@
 {
   "name": "@responsivy/desktop",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@responsivy/components": "^1.0.0",
@@ -17,7 +17,6 @@
     "cross-env": "^7.0.2",
     "easy-peasy": "^3.3.0",
     "firebase": "^7.14.3",
-    "electron-gumroad-license": "^1.0.3",
     "electron-is-dev": "^1.2.0",
     "eventemitter3": "^4.0.0",
     "immutability-helper": "^3.0.2",
@@ -31,9 +30,15 @@
     "react-scripts": "3.4.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
+    "electron-devtools-installer": "^3.0.0",
     "styled-components": "^5.1.0",
     "styled-tools": "^1.7.1",
     "typescript": "~3.7.2"
+  },
+  "author": {
+    "name": "Guilherme Bayer",
+    "email": "iamgbayer@gmail.com",
+    "url": "https://twitter.com/iamgbayer"
   },
   "build": {
     "appId": "com.responsivy",
@@ -42,9 +47,17 @@
       "buildResources": "assets",
       "output": "build"
     },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "icons/icon.png"
+    },
     "win": {
       "icon": "icons/icon.ico",
-      "artifactName": "${productName}-Setup-${version}.${ext}"
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "target": [
+        "nsis",
+        "msi"
+      ]
     },
     "linux": {
       "desktop": {
@@ -52,9 +65,8 @@
       },
       "icon": "icons/icon.png",
       "target": [
-        {
-          "target": "AppImage"
-        }
+        "AppImage",
+        "deb"
       ]
     }
   },
@@ -62,7 +74,7 @@
   "homepage": "./",
   "scripts": {
     "start": "concurrently \"cross-env PORT=3006 BROWSER=none craco start\" \"wait-on http://localhost:3006 && electron .\"",
-    "build": "craco build && yarn electron-builder",
+    "build": "craco build && yarn electron-builder build -wl",
     "package": "yarn build && electron-builder build -mwl",
     "release": "craco build && electron-builder --publish=always",
     "test": "craco test"
@@ -87,9 +99,8 @@
   ],
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "electron": "^8.2.3",
-    "electron-builder": "^22.5.1",
-    "electron-devtools-installer": "^3.0.0",
+    "electron-builder": "^22.6.1",
+    "electron": "9.0.0",
     "wait-on": "^4.0.2"
   }
 }

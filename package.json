@@ -10,6 +10,7 @@
     "start:landing": "yarn workspace @responsivy/landing start",
     "start:desktop": "yarn workspace @responsivy/desktop start",
     "build:landing": "yarn workspace @responsivy/landing build",
+    "build:desktop": "yarn workspace @responsivy/desktop build",
     "bootstrap": "lerna bootstrap"
   },
   "workspaces": [
