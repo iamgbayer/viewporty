@@ -376,7 +376,7 @@ export default function Landing() {
             >
               <motion.div variants={enterWithY(200)}>
                 <Title fontSize={[5, 7]} fontWeight={3}>
-                  Making responsive has never been easier.
+                  Making and testing responsive has never been easier.
                 </Title>
               </motion.div>
 
