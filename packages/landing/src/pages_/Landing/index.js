@@ -389,8 +389,10 @@ export default function Landing() {
                   marginTop={30}
                   marginBottom={40}
                 >
-                  Spend half the time designing and developing responsive
-                  websites by testing them on multiple screens at once.
+                  Responsivy is a desktop tool that helps you to improve your
+                  productivity when making responsive by testing in multiples
+                  screens sizes, based on real devices and custom sizes defined
+                  by you.
                 </Description>
               </motion.div>
 
