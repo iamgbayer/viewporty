@@ -140,13 +140,11 @@ export default function Features() {
               animation={<Animation width={360} type="sync" />}
               width={50}
               title="All actions synced"
-              description="When interacting with some screen, all the actions like click, scroll, and others will be synced to the others screens."
+              description="When interacting with some screen, all the actions like click, scroll, and others will be synced to the other screens."
             />
           </Cards>
         </Content>
 
-        {/* <Icon name="organizeDevices" width={200} height={200} />
-      <Text>All devices synced</Text> */}
         <SecondWave src={secondWave} />
       </Container>
     </>
