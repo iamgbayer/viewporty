@@ -3,16 +3,16 @@ import styled from 'styled-components'
 import { always } from 'ramda'
 
 import { Organize } from './Organize'
-import { Success } from './Success'
+import { Sync } from './Sync'
 
 const Container = styled.div`
   width: 100%;
 `
 
-export const Animation = ({ type = 'organize', width, height, color }) => {
+export const Animation = ({ type = 'organize', width, height }) => {
   const mapping = {
-    organize: always(<Organize />),
-    success: always(<Success width={width} height={height} color={color} />)
+    organize: always(<Organize width={width} height={height} />),
+    sync: always(<Sync width={width} height={height} />)
   }
 
   const Animable = mapping[type]

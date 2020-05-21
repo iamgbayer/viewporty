@@ -19,10 +19,10 @@ const largeDeviceAnimation = {
   x: 48
 }
 
-export const Organize = () => (
+export const Organize = ({ width, height }) => (
   <svg
-    width="608"
-    height="396"
+    width={width}
+    height={height}
     viewBox="0 0 608 396"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

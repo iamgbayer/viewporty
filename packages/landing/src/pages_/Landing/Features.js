@@ -41,11 +41,12 @@ const Content = styled.div`
   z-index: ${theme('zindex.one')};
 `
 
-const Feature = styled.div`
+const Cards = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `
 
 const Card = ({
@@ -99,19 +100,15 @@ Card.Content = styled(motion.div)`
   width: 100%;
   max-width: 380px;
 
-  ${media.lessThan('large')`
-    ${ifProp(
-      { justifyLeft: true },
-      css`
-        padding-left: 25px;
-      `,
-      css`
-        padding-right: 20px;
-      `
-    )}
-
-   
-  `}
+  ${ifProp(
+    { justifyLeft: true },
+    css`
+      padding-left: 50px;
+    `,
+    css`
+      padding-right: 30px;
+    `
+  )}
 
   ${media.lessThan('small')`
     text-align: center;
@@ -129,14 +126,23 @@ export default function Features() {
             What we have
           </Title>
 
-          <Feature>
+          <Cards>
             <Card
-              animation={<Animation type="organize" />}
+              animation={<Animation width={450} type="organize" />}
               width={50}
               title="Organize your screens"
               description="Reorder, hide, and create new screens with custom dimensions, user agent, etc. Also you can resize them."
             />
-          </Feature>
+
+            <Card
+              hasMargin={true}
+              justifyLeft={true}
+              animation={<Animation width={360} type="sync" />}
+              width={50}
+              title="All actions synced"
+              description="When interacting with some screen, all the actions like click, scroll, and others will be synced to the others screens."
+            />
+          </Cards>
         </Content>
 
         {/* <Icon name="organizeDevices" width={200} height={200} />
