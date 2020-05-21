@@ -11,7 +11,6 @@ import { Animation, Hidden } from '@/components'
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
   position: relative;
   padding: 110px 0;
 `
@@ -20,7 +19,7 @@ const SecondWave = styled.img`
   position: absolute;
   right: 0;
   top: 0;
-  z-index: ${theme('zindex.negative')};
+  z-index: ${theme('zindex.behind')};
 `
 
 const Title = styled(Text)`

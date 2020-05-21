@@ -12,6 +12,7 @@ import { useFormik } from 'formik'
 import { space, fontSize, fontWeight } from 'styled-system'
 
 import firstWave from '@/assets/images/firstWave.svg'
+import thirdWave from '@/assets/images/thirdWave.svg'
 import video from '@/assets/images/video.mp4'
 
 import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
@@ -76,6 +77,18 @@ const FirstWave = styled.img`
   right: 0;
   bottom: 0;
   z-index: ${theme('zindex.behind')};
+`
+
+const ThirdWave = styled.img`
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+  z-index: ${theme('zindex.behind')};
+  max-width: 60%;
+
+  ${media.lessThan('medium')`
+    max-width: 90%;
+  `}
 `
 
 const Content = styled.div`
@@ -421,7 +434,7 @@ export default function Landing() {
 
         <Features />
 
-        <Faq />
+        <ThirdWave src={thirdWave} />
       </Content>
     </>
   )

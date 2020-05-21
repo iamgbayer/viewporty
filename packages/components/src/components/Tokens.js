@@ -11,7 +11,7 @@ export const Tokens = {
     }
   },
   zindex: {
-    negative: -1,
+    behind: -1,
     one: 1,
     two: 2,
     overlay: 8000,
