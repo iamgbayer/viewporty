@@ -227,7 +227,7 @@ export default function Landing() {
 
   const { email, password } = values
 
-  const getEarlyAccessAccount = () => {
+  const getEarlyAccess = () => {
     validateForm()
 
     isValid &&
@@ -311,11 +311,7 @@ export default function Landing() {
               marginBottom={35}
             />
 
-            <Button
-              full={true}
-              onClick={getEarlyAccessAccount}
-              variant="secondary"
-            >
+            <Button full={true} onClick={getEarlyAccess} variant="secondary">
               Get early access
             </Button>
           </>
@@ -446,7 +442,7 @@ export default function Landing() {
         </Header>
 
         <Element name="features">
-          <Features />
+          <Features getEarlyAccess={getEarlyAccess} />
         </Element>
 
         <ThirdWave src={thirdWave} />
