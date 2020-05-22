@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext, memo } from 'react'
-import styled, { css, ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
+import { scroller, Element } from 'react-scroll'
+
 import { theme, ifProp } from 'styled-tools'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'next-translate'
-import Link from 'next-translate/Link'
 import media from 'styled-media-query'
 import { lte, equals, assoc } from 'ramda'
 import Player from 'react-player'
@@ -18,7 +19,6 @@ import video from '@/assets/images/video.mp4'
 import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
 import { auth } from '@/config'
-import { Animation } from '@/components'
 
 import Head from './Head'
 import Features from './Features'
@@ -201,6 +201,10 @@ const Underlined = styled.a`
   text-decoration: underline;
 `
 
+const Clickable = styled(Text)`
+  cursor: pointer;
+`
+
 const EarlyAccessCreated = styled.span`
   ${space}
   ${fontSize}
@@ -212,7 +216,6 @@ export default function Landing() {
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setMenuOpen] = useState(true)
   const [modal, setModal] = useState(initialModalState)
-  const { t } = useTranslation()
 
   const { handleChange, values, isValid, errors, validateForm } = useFormik({
     initialValues,
@@ -348,13 +351,23 @@ export default function Landing() {
                 </a>
               </Text>
 
-              <Text className="navigable" weight="medium">
+              <Clickable
+                onClick={() =>
+                  scroller.scrollTo('features', {
+                    duration: 1100,
+                    delay: 0,
+                    smooth: 'easeInOutQuart'
+                  })
+                }
+                className="navigable"
+                weight="medium"
+              >
                 Features
-              </Text>
+              </Clickable>
 
-              <Text className="navigable" weight="medium">
+              {/* <Text className="navigable" weight="medium">
                 FAQ
-              </Text>
+              </Text> */}
 
               <Text className="navigable" weight="medium">
                 <a href="https://trello.com/b/P7Mly36u/roadmap" target="_blank">
@@ -432,7 +445,9 @@ export default function Landing() {
           <FirstWave src={firstWave} />
         </Header>
 
-        <Features />
+        <Element name="features">
+          <Features />
+        </Element>
 
         <ThirdWave src={thirdWave} />
       </Content>
