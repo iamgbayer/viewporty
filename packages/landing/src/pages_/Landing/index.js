@@ -213,8 +213,8 @@ const EarlyAccessCreated = styled.span`
 
 export default function Landing() {
   const { colors } = useContext(ThemeContext)
-  const [isMobile, setIsMobile] = useState(false)
-  const [isMenuOpen, setMenuOpen] = useState(true)
+  const [isMobile, setIsMobile] = useState(true)
+  const [isMenuOpen, setMenuOpen] = useState(false)
   const [modal, setModal] = useState(initialModalState)
 
   const { handleChange, values, isValid, errors, validateForm } = useFormik({
@@ -244,7 +244,8 @@ export default function Landing() {
   }, [])
 
   useEffect(() => {
-    isMobile && setMenuOpen(false)
+    console.log(isMobile)
+    isMobile ? setMenuOpen(false) : setMenuOpen(true)
   }, [isMobile])
 
   const { isModalOpen, content } = modal
