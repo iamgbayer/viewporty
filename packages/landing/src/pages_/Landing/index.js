@@ -22,7 +22,7 @@ import { auth } from '@/config'
 
 import Head from './Head'
 import Features from './Features'
-import Faq from './Faq'
+import Footer from './Footer'
 
 const Container = styled.div`
   width: 100%;
@@ -82,7 +82,7 @@ const FirstWave = styled.img`
 const ThirdWave = styled.img`
   position: absolute;
   left: 0;
-  bottom: 30px;
+  bottom: 130px;
   z-index: ${theme('zindex.behind')};
   max-width: 60%;
 
@@ -446,6 +446,8 @@ export default function Landing() {
         </Element>
 
         <ThirdWave src={thirdWave} />
+
+        <Footer />
       </Content>
     </>
   )

@@ -148,7 +148,8 @@ export default function Features({ getEarlyAccess }) {
           </Cards>
 
           <Description fontSize={5} textAlign="center" fontWeight={3}>
-            And more will come with your help, now get the free early access!
+            And more will come with your help. Now, don't waste time and get the
+            free early access!
           </Description>
 
           <Button variant="secondary" marginTop={20} onClick={getEarlyAccess}>
