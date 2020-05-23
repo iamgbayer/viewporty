@@ -220,8 +220,8 @@ export default function Landing() {
   const { handleChange, values, isValid, errors, validateForm } = useFormik({
     initialValues,
     isInitialValid: validationSchema.isValidSync(initialValues),
+    validateOnMount: false,
     validateOnChange: true,
-    validateOnBlur: true,
     validationSchema
   })
 
@@ -236,6 +236,8 @@ export default function Landing() {
         .then(() => setModal(assoc('content', 'success')))
         .catch(console.log)
   }
+
+  const setModalOpen = () => setModal(assoc('isModalOpen', true))
 
   useEffect(() => {
     setIsMobile(lte(window.innerWidth, 768))
@@ -419,10 +421,7 @@ export default function Landing() {
               </motion.div>
 
               <motion.div variants={enterWithY(200)}>
-                <Button
-                  onClick={() => setModal(assoc('isModalOpen', true))}
-                  variant="secondary"
-                >
+                <Button onClick={setModalOpen} variant="secondary">
                   Get early access
                 </Button>
               </motion.div>
@@ -442,7 +441,7 @@ export default function Landing() {
         </Header>
 
         <Element name="features">
-          <Features getEarlyAccess={getEarlyAccess} />
+          <Features onClick={setModalOpen} />
         </Element>
 
         <ThirdWave src={thirdWave} />

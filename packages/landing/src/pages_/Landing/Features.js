@@ -120,7 +120,7 @@ const Description = styled(Text)`
   max-width: 600px;
 `
 
-export default function Features({ getEarlyAccess }) {
+export default function Features({ onClick }) {
   return (
     <>
       <Container>
@@ -152,7 +152,7 @@ export default function Features({ getEarlyAccess }) {
             free early access!
           </Description>
 
-          <Button variant="secondary" marginTop={20} onClick={getEarlyAccess}>
+          <Button variant="secondary" marginTop={20} onClick={onClick}>
             Get early access
           </Button>
         </Content>
