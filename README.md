@@ -5,6 +5,8 @@
 
 ## Issues
 
+## Contributing
+
 ## License
 
 Copyright (c) 2020 Guilherme Bayer.
