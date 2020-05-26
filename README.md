@@ -9,6 +9,8 @@
 
 ## Contributing
 
+Your contribution or suggestion is always welcome,<br/> you can see the project roadmap here on [Projects](https://github.com/iamgbayer/responsivy/projects/1), also you can help solving issues.
+
 ## License
 
 Copyright (c) 2020 Guilherme Bayer.
