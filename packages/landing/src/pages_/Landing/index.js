@@ -14,7 +14,7 @@ import { space, fontSize, fontWeight } from 'styled-system'
 
 import firstWave from '@/assets/images/firstWave.svg'
 import thirdWave from '@/assets/images/thirdWave.svg'
-import video from '@/assets/images/video.mp4'
+import video from '@/assets/images/video.gif'
 
 import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
@@ -172,7 +172,7 @@ const Hamburguer = styled(Icon)`
   `};
 `
 
-const Video = styled(Player)`
+const Video = styled.img`
   border-radius: ${theme('border.radius.four')};
   box-shadow: ${theme('shadow.two')};
   margin-top: 150px;
@@ -428,14 +428,16 @@ export default function Landing() {
               </motion.div>
             </Header.Content>
 
-            <Video
+            <Video src={video} />
+
+            {/* <Video
               url={video}
               width="100%"
               height="100%"
               loop={true}
               playing={true}
               muted
-            />
+            /> */}
           </Container>
 
           <FirstWave src={firstWave} />
