@@ -4,7 +4,7 @@ import { theme, ifProp } from 'styled-tools'
 import media from 'styled-media-query'
 import { motion } from 'framer-motion'
 
-import { Text, Button } from '@responsivy/components'
+import { Text } from '@responsivy/components'
 
 import secondWave from '@/assets/images/secondWave.svg'
 import { Animation, Hidden } from '@/components'
@@ -116,11 +116,7 @@ Card.Content = styled(motion.div)`
   `}
 `
 
-const Description = styled(Text)`
-  max-width: 600px;
-`
-
-export default function Features({ onClick }) {
+export default function Features() {
   return (
     <>
       <Container>
@@ -146,15 +142,6 @@ export default function Features({ onClick }) {
               description="When interacting with some screen, all the actions like click, scroll, and others will be synced to the other screens."
             />
           </Cards>
-
-          <Description fontSize={5} textAlign="center" fontWeight={3}>
-            And more will come with your help. Now, don't waste time and get the
-            free early access!
-          </Description>
-
-          <Button variant="secondary" marginTop={20} onClick={onClick}>
-            Get early access
-          </Button>
         </Content>
 
         <SecondWave src={secondWave} />

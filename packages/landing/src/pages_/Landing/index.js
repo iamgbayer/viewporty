@@ -1,28 +1,23 @@
-import React, { useState, useEffect, useContext, memo } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { scroller, Element } from 'react-scroll'
 
 import { theme, ifProp } from 'styled-tools'
 import { motion } from 'framer-motion'
-import { useTranslation } from 'next-translate'
 import media from 'styled-media-query'
-import { lte, equals, assoc } from 'ramda'
-import Player from 'react-player'
-import * as Yup from 'yup'
-import { useFormik } from 'formik'
-import { space, fontSize, fontWeight } from 'styled-system'
+import { lte } from 'ramda'
 
 import firstWave from '@/assets/images/firstWave.svg'
 import thirdWave from '@/assets/images/thirdWave.svg'
 import video from '@/assets/images/video.gif'
 
-import { Icon, Button, Text, Modal, Input } from '@responsivy/components'
+import { Icon, Button, Text } from '@responsivy/components'
 import { enterWithY } from '@/helpers'
-import { auth } from '@/config'
 
 import Head from './Head'
 import Features from './Features'
 import Footer from './Footer'
+import OpenSource from './OpenSource'
 
 const Container = styled.div`
   width: 100%;
@@ -182,145 +177,25 @@ const Video = styled.img`
   overflow: hidden;
 `
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid format').required('Required'),
-  password: Yup.string().min(8, 'Minimum 8 characters').required('Required')
-})
-
-const initialValues = {
-  email: '',
-  password: ''
-}
-
-const initialModalState = {
-  isModalOpen: false,
-  content: 'form'
-}
-
-const Underlined = styled.a`
-  text-decoration: underline;
-`
-
 const Clickable = styled(Text)`
   cursor: pointer;
-`
-
-const EarlyAccessCreated = styled.span`
-  ${space}
-  ${fontSize}
-  ${fontWeight}
 `
 
 export default function Landing() {
   const { colors } = useContext(ThemeContext)
   const [isMobile, setIsMobile] = useState(true)
   const [isMenuOpen, setMenuOpen] = useState(false)
-  const [modal, setModal] = useState(initialModalState)
-
-  const { handleChange, values, isValid, errors, validateForm } = useFormik({
-    initialValues,
-    isInitialValid: validationSchema.isValidSync(initialValues),
-    validateOnMount: false,
-    validateOnChange: true,
-    validationSchema
-  })
-
-  const { email, password } = values
-
-  const getEarlyAccess = () => {
-    validateForm()
-
-    isValid &&
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => setModal(assoc('content', 'success')))
-        .catch(console.log)
-  }
-
-  const setModalOpen = () => setModal(assoc('isModalOpen', true))
 
   useEffect(() => {
     setIsMobile(lte(window.innerWidth, 768))
   }, [])
 
   useEffect(() => {
-    console.log(isMobile)
     isMobile ? setMenuOpen(false) : setMenuOpen(true)
   }, [isMobile])
 
-  const { isModalOpen, content } = modal
-
   return (
     <>
-      <Modal isOpen={isModalOpen} close={() => setModal(initialModalState)}>
-        {equals(content, 'success') && (
-          <>
-            <Description>
-              <EarlyAccessCreated
-                fontSize={[4, 5]}
-                fontWeight={3}
-                marginBottom={30}
-              >
-                Your account for early access has been successfully created,
-                follow our{' '}
-                <Underlined
-                  href="https://twitter.com/responsivy"
-                  target="_blank"
-                >
-                  Twitter
-                </Underlined>{' '}
-                to receive updates!
-              </EarlyAccessCreated>
-            </Description>
-
-            <Button
-              full={true}
-              onClick={() => setModal(initialModalState)}
-              variant="secondary"
-            >
-              Close
-            </Button>
-          </>
-        )}
-
-        {equals(content, 'form') && (
-          <>
-            <Input
-              id="email"
-              full={true}
-              label="Email"
-              placeholder="john@doe.com"
-              onChange={handleChange}
-              error={{
-                has: !!errors.email,
-                message: errors.email
-              }}
-              value={email}
-              marginBottom={10}
-            />
-
-            <Input
-              type="password"
-              id="password"
-              full={true}
-              placeholder="••••••••"
-              label="Password"
-              error={{
-                has: !!errors.password,
-                message: errors.password
-              }}
-              onChange={handleChange}
-              value={password}
-              marginBottom={35}
-            />
-
-            <Button full={true} onClick={getEarlyAccess} variant="secondary">
-              Get early access
-            </Button>
-          </>
-        )}
-      </Modal>
-
       <Content>
         <Head />
 
@@ -364,29 +239,22 @@ export default function Landing() {
                 Features
               </Clickable>
 
-              {/* <Text className="navigable" weight="medium">
-                FAQ
-              </Text> */}
-
-              <Text className="navigable" weight="medium">
-                <a href="https://trello.com/b/P7Mly36u/roadmap" target="_blank">
-                  Suggest features
-                </a>
+              <Text
+                onClick={() =>
+                  scroller.scrollTo('opensource', {
+                    duration: 1100,
+                    delay: 0,
+                    smooth: 'easeInOutQuart'
+                  })
+                }
+                className="navigable"
+                weight="medium"
+              >
+                It's open source!
               </Text>
             </Menu>
           )}
         </Nav>
-
-        {/* 
-      <Languages variants={enterWithY(10)}>
-        <Link href="/" lang="en" key="en">
-          <Language>EN</Language>
-        </Link>
-
-        <Link href="/" lang="pt-BR" key="pt-BR">
-          <Language left={15}>pt-BR</Language>
-        </Link>
-      </Languages> */}
 
         <Header>
           <Container>
@@ -422,29 +290,22 @@ export default function Landing() {
               </motion.div>
 
               <motion.div variants={enterWithY(200)}>
-                <Button onClick={setModalOpen} variant="secondary">
-                  Get early access
-                </Button>
+                <Button variant="secondary">Soon download</Button>
               </motion.div>
             </Header.Content>
 
             <Video src={video} />
-
-            {/* <Video
-              url={video}
-              width="100%"
-              height="100%"
-              loop={true}
-              playing={true}
-              muted
-            /> */}
           </Container>
 
           <FirstWave src={firstWave} />
         </Header>
 
         <Element name="features">
-          <Features onClick={setModalOpen} />
+          <Features />
+        </Element>
+
+        <Element name="opensource">
+          <OpenSource />
         </Element>
 
         <ThirdWave src={thirdWave} />
