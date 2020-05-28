@@ -73,9 +73,7 @@
   "homepage": "./",
   "scripts": {
     "start": "concurrently \"cross-env PORT=3006 BROWSER=none craco start\" \"wait-on http://localhost:3006 && electron .\"",
-    "build": "craco build && yarn electron-builder build -wl",
-    "package": "yarn build && electron-builder build -mwl",
-    "release": "craco build && electron-builder --publish=always",
+    "build": "craco build && yarn electron-builder",
     "test": "craco test"
   },
   "eslintConfig": {
