@@ -30,6 +30,27 @@ function getElementByXPath(path) {
   ).singleNodeValue
 }
 
+const getCssPath = (element) => {
+  if (!(element instanceof Element)) return
+  var path = []
+
+  while (element.nodeType === Node.ELEMENT_NODE) {
+    var selector = element.nodeName.toLowerCase()
+    var sib = element,
+      nth = 1
+    while (
+      sib.nodeType === Node.ELEMENT_NODE &&
+      (sib = sib.previousElementSibling) &&
+      nth++
+    );
+    selector += ':nth-child(' + nth + ')'
+    path.unshift(selector)
+    element = element.parentNode
+  }
+
+  return path.join(' > ')
+}
+
 let responder
 let isViewing = false
 
@@ -40,7 +61,7 @@ const clickListener = (event) => {
 
   document.removeEventListener('click', clickListener)
 
-  ipcRenderer.send('whenClicked', getXPathForElement(event.target))
+  ipcRenderer.send('whenClicked', getCssPath(event.target))
 
   if (typeof responder !== 'undefind') clearTimeout(responder)
 
@@ -54,7 +75,11 @@ document.addEventListener('click', clickListener)
 
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mouseout', () => (isViewing = false))
-  document.addEventListener('mouseover', () => (isViewing = true))
+  document.addEventListener('mouseover', ({ clientX, clientY }) => {
+    isViewing = true
+
+    ipcRenderer.sendToHost('coordinates', { x: clientX, y: clientY })
+  })
 
   const getData = () => {
     const { documentElement } = document
@@ -76,12 +101,23 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   ipcRenderer.on('toClick', (_, data) => {
-    const target = getElementByXPath(data)
+    const target = document.querySelector(data)
 
     if (isViewing) {
       return
     }
 
-    window.setTimeout(() => target && target.click(), 0)
+    if (target.click) {
+      return target.click()
+    }
+
+    if (target.fireEvent) {
+      return target.fireEvent('onclick')
+    }
+
+    const event = document.createEvent('Events')
+    event.initEvent('click', true, false)
+
+    target.dispatchEvent(event)
   })
 })

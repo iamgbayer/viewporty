@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { theme } from 'styled-tools'
 
-import { Text, Icon } from '@responsivy/components'
+import { Text, Icon } from '@viewporty/components'
 import media from 'styled-media-query'
 
 const Content = styled.div`
@@ -46,7 +46,7 @@ export default function Footer() {
 
   const open = (username) => () => {
     const getBySocial = {
-      responsivy: 'https://twitter.com/responsivy',
+      viewporty: 'https://twitter.com/viewporty',
       iamgbayer: 'https://twitter.com/iamgbayer'
     }
 
@@ -64,12 +64,12 @@ export default function Footer() {
           </Text>
 
           <Social
-            onClick={open('responsivy')}
+            onClick={open('viewporty')}
             color={colors.one}
             marginTop={10}
             fontWeight={0}
           >
-            @responsivy
+            @viewporty
           </Social>
 
           <Social

@@ -4,7 +4,7 @@ import { useStoreState } from 'easy-peasy'
 import { not, equals } from 'ramda'
 import { theme, prop } from 'styled-tools'
 
-import { Device } from '@/components'
+import { Device, Devtools } from '@/components'
 import { isValidUrl } from '@/helpers'
 
 const Container = styled.div`
@@ -104,6 +104,8 @@ export const Devices = () => {
               userAgent={userAgent}
             />
           ))}
+
+      <Devtools />
 
       {not(url) && <Empty />}
     </Container>

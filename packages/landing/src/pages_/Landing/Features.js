@@ -4,7 +4,7 @@ import { theme, ifProp } from 'styled-tools'
 import media from 'styled-media-query'
 import { motion } from 'framer-motion'
 
-import { Text } from '@responsivy/components'
+import { Text } from '@viewporty/components'
 
 import secondWave from '@/assets/images/secondWave.svg'
 import { Animation, Hidden } from '@/components'

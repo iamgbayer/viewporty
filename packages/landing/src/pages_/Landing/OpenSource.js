@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Button, Text } from '@responsivy/components'
+import { Button, Text } from '@viewporty/components'
 
 const Description = styled(Text)`
   max-width: 600px;
@@ -25,7 +25,7 @@ export default function OpenSource() {
 
       <Button
         variant="secondary"
-        onClick={() => window.open('https://github.com/iamgbayer/responsivy')}
+        onClick={() => window.open('https://github.com/iamgbayer/viewporty')}
         marginTop={20}
       >
         It's open source!

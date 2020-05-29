@@ -5,7 +5,7 @@ import { not, equals, isNil, indexOf } from 'ramda'
 import { useStoreActions, useStoreState } from 'easy-peasy'
 
 import { WindowControl } from '@/components'
-import { Icon } from '@responsivy/components'
+import { Icon } from '@viewporty/components'
 
 import { emit, EVENTS } from '@/emitter'
 
@@ -16,7 +16,7 @@ const Container = styled.div`
 `
 
 const Bar = styled.div`
-  -webkit-app-region: drag;
+  // -webkit-app-region: drag;
   position: fixed;
   width: 100%;
   height: 36px;

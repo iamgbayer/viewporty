@@ -4,7 +4,7 @@ import { prop, theme } from 'styled-tools'
 import { isNil, not, equals } from 'ramda'
 import { useStoreActions } from 'easy-peasy'
 
-import { Text } from '@responsivy/components'
+import { Text } from '@viewporty/components'
 import { once, removeListener, EVENTS } from '@/emitter'
 import { percentage } from '@/helpers'
 
@@ -55,7 +55,10 @@ export const Device = memo(({ url, name, width, height, userAgent, scale }) => {
 
     webview.addEventListener('dom-ready', () => {
       const { webContents } = webview.getWebContents()
-      // webview.openDevTools()
+      webview.openDevTools()
+
+      // webview.inspectElement(0, 0)
+      // webview.isDevToolsOpened && webview.closeDevTools()
 
       // console.log(webview.getZoomLevel(always(console.log)))
 
@@ -74,6 +77,8 @@ export const Device = memo(({ url, name, width, height, userAgent, scale }) => {
         //   height: parseInt(height)
         // }
       })
+
+      // webview.addEventListener('devtools-opened', () => webview.closeDevTools())
 
       webview.addEventListener(
         'will-navigate',

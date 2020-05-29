@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { theme, switchProp } from 'styled-tools'
 import { equals, or } from 'ramda'
 
-import { Icon } from '@responsivy/components'
+import { Icon } from '@viewporty/components'
 
 const { remote } = window.require('electron')
 const os = window.require('os')

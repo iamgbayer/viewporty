@@ -10,7 +10,7 @@ import update from 'immutability-helper'
 import { Devices } from '@/screens'
 
 import { Header, Sidebar } from '@/containers'
-import { Modal, Text, Icon } from '@responsivy/components'
+import { Modal, Text, Icon } from '@viewporty/components'
 import { theme } from 'styled-tools'
 
 const Description = styled.div`

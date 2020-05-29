@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { theme, ifProp } from 'styled-tools'
 import { space } from 'styled-system'
 
-import { Icon, Text } from '@responsivy/components'
+import { Icon, Text } from '@viewporty/components'
 import { useStoreActions, useStoreState } from 'easy-peasy'
 import { not } from 'ramda'
 

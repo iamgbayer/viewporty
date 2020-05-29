@@ -9,7 +9,7 @@ import styled, { ThemeContext, css } from 'styled-components'
 import { theme, switchProp, ifProp } from 'styled-tools'
 import { space } from 'styled-system'
 
-import { Text } from '@responsivy/components'
+import { Text } from '@viewporty/components'
 import { equals } from 'ramda'
 
 const Container = styled.div`

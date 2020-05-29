@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import TagManager from 'react-gtm-module'
 import { ThemeProvider } from 'styled-components'
 
-import { Theme, Reset } from '@responsivy/components'
+import { Theme, Reset } from '@viewporty/components'
 import { Fonts } from '@/components'
 
 const tagManagerArgs = {

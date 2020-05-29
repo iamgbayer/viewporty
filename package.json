@@ -1,16 +1,16 @@
 {
-  "name": "responsivy",
+  "name": "viewporty",
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
   "dependencies": {},
   "scripts": {
     "start": "lerna run start",
-    "dev:landing": "yarn workspace @responsivy/landing dev",
-    "start:landing": "yarn workspace @responsivy/landing start",
-    "start:desktop": "yarn workspace @responsivy/desktop start",
-    "build:landing": "yarn workspace @responsivy/landing build",
-    "build:desktop": "yarn workspace @responsivy/desktop build",
+    "dev:landing": "yarn workspace @viewporty/landing dev",
+    "start:landing": "yarn workspace @viewporty/landing start",
+    "start:desktop": "yarn workspace @viewporty/desktop start",
+    "build:landing": "yarn workspace @viewporty/landing build",
+    "build:desktop": "yarn workspace @viewporty/desktop build",
     "bootstrap": "lerna bootstrap"
   },
   "workspaces": [

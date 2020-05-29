@@ -7,7 +7,7 @@ const withTM = require('next-transpile-modules')
 const PATH = require('./path')
 
 module.exports = withPlugins(
-  [withFonts, withImages, withVideos, withTM(['@responsivy/components'])],
+  [withFonts, withImages, withVideos, withTM(['@viewporty/components'])],
   {
     webpack: (config) => {
       config.resolve.alias['@'] = PATH.source

@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import { StoreProvider } from 'easy-peasy'
 import { PersistGate } from 'redux-persist/integration/react'
 
-import { Theme, Reset } from '@responsivy/components'
+import { Theme, Reset } from '@viewporty/components'
 import { store, persistor } from '@/store'
 
 import Router from './Router'

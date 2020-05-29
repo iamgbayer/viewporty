@@ -11,7 +11,7 @@ import firstWave from '@/assets/images/firstWave.svg'
 import thirdWave from '@/assets/images/thirdWave.svg'
 import video from '@/assets/images/video.gif'
 
-import { Icon, Button, Text } from '@responsivy/components'
+import { Icon, Button, Text } from '@viewporty/components'
 import { enterWithY } from '@/helpers'
 
 import Head from './Head'
@@ -220,7 +220,7 @@ export default function Landing() {
           {isMenuOpen && (
             <Menu>
               <Text className="navigable" weight="medium">
-                <a href="https://twitter.com/responsivy" target="_blank">
+                <a href="https://twitter.com/viewporty" target="_blank">
                   Twitter
                 </a>
               </Text>
@@ -282,7 +282,7 @@ export default function Landing() {
                   marginTop={30}
                   marginBottom={40}
                 >
-                  Responsivy is a desktop tool that helps you to improve your
+                  Viewporty is a desktop tool that helps you to improve your
                   productivity when making responsive by testing in multiples
                   screens sizes, based on real devices and custom sizes defined
                   by you.
