@@ -6,7 +6,9 @@
 <br/>
 <br/>
   
-![Quick demo](https://github.com/iamgbayer/viewporty/blob/master/packages/landing/src/assets/images/video.gif)
+<p align="center">
+  <img  src="https://github.com/iamgbayer/viewporty/blob/master/packages/landing/src/assets/images/video.gif">
+</p>
 
 ## Contributing
 
