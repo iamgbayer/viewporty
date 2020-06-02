@@ -2,6 +2,7 @@
   <img src="https://i.imgur.com/267DWxW.png" height="100" /><br/>
   <span><b>Viewporty</b>: <span>Making and testing responsive has never been easier.</span>
   <br/>
+  <br/>
   <img src="https://img.shields.io/twitter/follow/Viewporty?style=social"/>
 </p>
 
