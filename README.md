@@ -1,14 +1,18 @@
 <p align="center">
   <img src="https://i.imgur.com/267DWxW.png" height="100" /><br/>
-  <span><b>Viewporty</b>: <span>Making and testing responsive has never been easier.</span><br/>
+  <span><b>Viewporty</b>: <span>Making and testing responsive has never been easier.</span>
+  <br/>
+  <img src="https://img.shields.io/twitter/follow/Viewporty?style=social"/>
 </p>
-  
+
 <br/>
 <br/>
   
 <p align="center">
   <img  src="https://github.com/iamgbayer/viewporty/blob/master/packages/landing/src/assets/images/video.gif">
 </p>
+
+<br />
 
 ## Contributing
 
