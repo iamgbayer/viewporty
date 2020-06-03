@@ -5,6 +5,9 @@ const PATH = require('./path')
 
 module.exports = {
   webpack: {
+    configure: {
+      target: 'electron-renderer'
+    },
     alias: {},
     plugins: [],
     configure: (config, { env, paths }) => {

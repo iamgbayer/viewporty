@@ -29,7 +29,7 @@ const Controls = styled.div`
   display: flex;
 `
 
-const Address = styled.input`
+const URL = styled.input`
   -webkit-app-region: no-drag;
   max-width: 450px;
   width: 100%;
@@ -57,10 +57,20 @@ const Navigation = styled.div`
 
 export const Header = ({ children }) => {
   const { colors } = useContext(ThemeContext)
-  const { url, urls } = useStoreState(({ history }) => history)
-  const { setUrl } = useStoreActions(({ history }) => history)
+  const urlRef = useRef()
+
+  const { url, urls } = useStoreState(
+    ({ history }) => ({
+      url: history.url,
+      urls: history.urls
+    }),
+    equals
+  )
+  const { setUrl } = useStoreActions(({ history }) => ({
+    setUrl: history.setUrl
+  }))
+
   const [local, setLocal] = useState(url)
-  const addressRef = useRef()
 
   const navigate = ({ key }) => {
     if (not(equals(key, 'Enter'))) {
@@ -120,10 +130,11 @@ export const Header = ({ children }) => {
             />
           </Controls>
 
-          <Address
-            ref={addressRef}
+          <URL
+            ref={urlRef}
+            data-testid="header-url"
             placeholder="Type an URL"
-            onClick={() => addressRef.current.select()}
+            onClick={() => urlRef.current.select()}
             onKeyPress={navigate}
             value={local}
             onChange={({ target }) => setLocal(target.value)}

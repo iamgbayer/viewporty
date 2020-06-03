@@ -35,6 +35,16 @@ const state = {
     modal: null,
     align: 'wrap',
     isMenuCollapsed: false,
+    isInspectorVisible: false,
+    isDevtoolsVisible: false,
+    setAlign: action((state, align) =>
+      evolve(
+        {
+          align: always(align)
+        },
+        state
+      )
+    ),
     setAlign: action((state, align) =>
       evolve(
         {
@@ -47,6 +57,22 @@ const state = {
       evolve(
         {
           scale: always(scale)
+        },
+        state
+      )
+    ),
+    toggleInspectorVisibility: action((state) =>
+      evolve(
+        {
+          isInspectorVisible: always(!state.isInspectorVisible)
+        },
+        state
+      )
+    ),
+    toggleDevtoolsVisibility: action((state) =>
+      evolve(
+        {
+          isDevtoolsVisible: always(!state.isDevtoolsVisible)
         },
         state
       )

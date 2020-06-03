@@ -269,7 +269,7 @@ export default function Landing() {
             >
               <motion.div variants={enterWithY(200)}>
                 <Title fontSize={[5, 7]} fontWeight={3}>
-                  Making and testing responsive has never been easier.
+                  Making and testing responsive design has never been easier.
                 </Title>
               </motion.div>
 
@@ -282,15 +282,14 @@ export default function Landing() {
                   marginTop={30}
                   marginBottom={40}
                 >
-                  Viewporty is a desktop tool that helps you to improve your
-                  productivity when making responsive by testing in multiples
-                  screens sizes, based on real devices and custom sizes defined
-                  by you.
+                  Improve your productivity when making and testing responsive
+                  designs with Viewporty, a desktop tool that let you view
+                  multiple customisable screens sizes at once.
                 </Description>
               </motion.div>
 
               <motion.div variants={enterWithY(200)}>
-                <Button variant="secondary">Soon download</Button>
+                <Button variant="secondary">Download soon</Button>
               </motion.div>
             </Header.Content>
 

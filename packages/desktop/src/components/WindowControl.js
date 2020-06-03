@@ -6,7 +6,7 @@ import { equals, or } from 'ramda'
 import { Icon } from '@viewporty/components'
 
 const { remote } = window.require('electron')
-const os = window.require('os')
+const { platform } = window.require('os')
 
 const Container = styled.div`
   width: 235px;
@@ -112,9 +112,7 @@ export const WindowControl = () => {
   }
 
   const getPlatform = () => {
-    const platform = os.platform()
-
-    return or(equals(platform, 'win64'), equals(platform, 'win32'))
+    return or(equals(platform, 'win64'), equals(platform(), 'win32'))
       ? 'windows'
       : platform
   }

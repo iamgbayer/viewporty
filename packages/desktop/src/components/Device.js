@@ -57,28 +57,11 @@ export const Device = memo(({ url, name, width, height, userAgent, scale }) => {
       const { webContents } = webview.getWebContents()
       webview.openDevTools()
 
-      // webview.inspectElement(0, 0)
-      // webview.isDevToolsOpened && webview.closeDevTools()
-
-      // console.log(webview.getZoomLevel(always(console.log)))
-
       once(EVENTS.reload, (url) => webContents.loadURL(url))
 
       webContents.enableDeviceEmulation({
         screenPosition: 'mobile'
-        // scale: 1,
-        // deviceScaleFactor: 2,
-        // screenSize: {
-        //   width: parseInt(width),
-        //   height: parseInt(height)
-        // },
-        // viewSize: {
-        //   width: parseInt(width),
-        //   height: parseInt(height)
-        // }
       })
-
-      // webview.addEventListener('devtools-opened', () => webview.closeDevTools())
 
       webview.addEventListener(
         'will-navigate',
@@ -91,19 +74,31 @@ export const Device = memo(({ url, name, width, height, userAgent, scale }) => {
 
   return (
     <Container
+      data-testid="device-container"
       bottom={height - percentage(scale, height)}
       right={width - percentage(scale, width)}
     >
       <Controls>
-        <Text color={colors.three} fontSize={1} marginBottom="5px">
+        <Text
+          data-testid="device-name"
+          color={colors.three}
+          fontSize={1}
+          marginBottom="5px"
+        >
           {name}
         </Text>
         <Text color={colors.five} fontSize={0}>
-          ({width} x {height}) <Scale>{scale}%</Scale>
+          ({width} x {height}){' '}
+          <Scale data-testid="device-scale">{scale}%</Scale>
         </Text>
       </Controls>
 
-      <Display width={width} height={height} scale={scale / 100}>
+      <Display
+        data-testid="device-display"
+        width={width}
+        height={height}
+        scale={scale / 100}
+      >
         <webview
           id="webview"
           useragent={userAgent}

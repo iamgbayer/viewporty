@@ -18,6 +18,15 @@ export const Theme = {
       twelve: '#E9E9E9',
       thirteen: '#fff'
     },
+    devtools: {
+      colors: {
+        one: '#87b2bc',
+        two: '#AE8152',
+        three: '#E3C381',
+        four: '#B7C47F',
+        five: '#35D4C7'
+      }
+    },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)'
     }

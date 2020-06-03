@@ -48,9 +48,10 @@ const Empty = styled.div`
 `
 
 export const Devices = () => {
-  const { scale, isMenuCollapsed, align } = useStoreState(
+  const { scale, isMenuCollapsed, align, isDevtoolsVisible } = useStoreState(
     ({ config }) => config
   )
+
   const getMenuWidth = () => (isMenuCollapsed ? 40 : 190)
 
   const getWidth = () => window.innerWidth - getMenuWidth()
@@ -105,7 +106,7 @@ export const Devices = () => {
             />
           ))}
 
-      <Devtools />
+      {isDevtoolsVisible && <Devtools />}
 
       {not(url) && <Empty />}
     </Container>

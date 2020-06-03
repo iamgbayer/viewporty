@@ -81,13 +81,15 @@ export const Sidebar = ({ children }) => {
     toggleOrientation,
     setScale,
     setMenuCollapsed,
-    setAlign
+    setAlign,
+    toggleDevtoolsVisibility
   } = useStoreActions(({ config, devices }) => ({
     toggleOrientation: devices.toggleOrientation,
     setModal: config.setModal,
     setScale: config.setScale,
     setAlign: config.setAlign,
-    setMenuCollapsed: config.setMenuCollapsed
+    setMenuCollapsed: config.setMenuCollapsed,
+    toggleDevtoolsVisibility: config.toggleDevtoolsVisibility
   }))
 
   return (
@@ -131,7 +133,16 @@ export const Sidebar = ({ children }) => {
           icon="layers"
           width={19}
           height={19}
-          description="Organize devices"
+          description="Organize screens"
+        />
+
+        <Option
+          isCollapsed={isMenuCollapsed}
+          onClick={() => toggleDevtoolsVisibility()}
+          icon="devtools"
+          width={19}
+          height={19}
+          description="Devtools"
         />
 
         <Separator />

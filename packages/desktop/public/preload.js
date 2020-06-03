@@ -1,34 +1,5 @@
-const { ipcRenderer } = require('electron')
-
-function getXPathForElement(element) {
-  const idx = (sib, name) =>
-    sib
-      ? idx(sib.previousElementSibling, name || sib.localName) +
-        (sib.localName == name)
-      : 1
-
-  const segs = (element) =>
-    !element || element.nodeType !== 1
-      ? ['']
-      : element.id && document.getElementById(element.id) === element
-      ? [`id("${element.id}")`]
-      : [
-          ...segs(element.parentNode),
-          `${element.localName.toLowerCase()}[${idx(element)}]`
-        ]
-
-  return segs(element).join('/')
-}
-
-function getElementByXPath(path) {
-  return document.evaluate(
-    path,
-    document,
-    null,
-    XPathResult.ANY_UNORDERED_NODE_TYPE,
-    null
-  ).singleNodeValue
-}
+const { ipcRenderer, remote } = require('electron')
+const DomInspector = require('./lib/dom-inspector')
 
 const getCssPath = (element) => {
   if (!(element instanceof Element)) return
@@ -51,10 +22,93 @@ const getCssPath = (element) => {
   return path.join(' > ')
 }
 
+const getStyles = (a) => {
+  let sheets = document.styleSheets,
+    o = []
+
+  a.matches =
+    a.matches ||
+    a.webkitMatchesSelector ||
+    a.mozMatchesSelector ||
+    a.msMatchesSelector ||
+    a.oMatchesSelector
+
+  for (var i in sheets) {
+    var rules = sheets[i].rules || sheets[i].cssRules
+    for (var r in rules) {
+      if (a.matches(rules[r].selectorText)) {
+        o.push(rules[r].cssText)
+      }
+    }
+  }
+
+  return o
+}
+
+const getCssPathCleaned = (element) => {
+  const stack = []
+
+  while (element.parentNode != null) {
+    let sibCount = 0
+    let sibIndex = 0
+
+    for (
+      let iterator = 0;
+      iterator < element.parentNode.childNodes.length;
+      iterator++
+    ) {
+      let sib = element.parentNode.childNodes[iterator]
+
+      if (sib.nodeName == element.nodeName) {
+        if (sib === element) {
+          sibIndex = sibCount
+        }
+
+        sibCount++
+      }
+    }
+
+    element.hasAttribute('id') && element.id !== ''
+      ? stack.unshift(element.nodeName.toLowerCase() + '#' + element.id)
+      : stack.unshift(element.nodeName.toLowerCase())
+
+    element = element.parentNode
+  }
+
+  return stack.join(' > ')
+}
+
 let responder
 let isViewing = false
+let canInspect = false
 
 const clickListener = (event) => {
+  if (canInspect && isViewing) {
+    canInspect = false
+
+    const { target } = event
+    const { textContent } = target
+    const { cssText } = window.getComputedStyle(target)
+
+    const data = {
+      textContent,
+      computedStyles: cssText,
+      styles: getStyles(target),
+      path: getCssPathCleaned(target)
+    }
+
+    const allWebContents = remote.webContents.getAllWebContents()
+
+    allWebContents.forEach((webContent) => {
+      webContent.send('toInspect', false)
+      webContent.send('whenInspected', data)
+    })
+
+    event.preventDefault()
+
+    return
+  }
+
   if (!isViewing) {
     return
   }
@@ -71,14 +125,21 @@ const clickListener = (event) => {
   )
 }
 
-document.addEventListener('click', clickListener)
-
 document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('mouseout', () => (isViewing = false))
-  document.addEventListener('mouseover', ({ clientX, clientY }) => {
+  const inspector = new DomInspector()
+
+  document.addEventListener('click', clickListener)
+
+  document.addEventListener('mouseout', () => {
+    isViewing = false
+
+    inspector.disable()
+  })
+
+  document.addEventListener('mouseover', () => {
     isViewing = true
 
-    ipcRenderer.sendToHost('coordinates', { x: clientX, y: clientY })
+    canInspect && inspector.enable()
   })
 
   const getData = () => {
@@ -90,6 +151,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('scroll', () => {
     isViewing && ipcRenderer.send('whenScrolled', getData())
+  })
+
+  ipcRenderer.on('toInspect', (_, data) => (canInspect = data))
+
+  ipcRenderer.on('whenStyleModified', (_, data) => {
+    const { property, selector, value } = data
+    const element = document.querySelector(selector)
+
+    element.style[property] = value
   })
 
   ipcRenderer.on('toScroll', (_, data) => {
