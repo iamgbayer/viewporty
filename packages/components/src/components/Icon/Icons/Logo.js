@@ -5,7 +5,7 @@ import { width, height } from 'styled-system'
 
 const Container = styled.div`
   .st0 {
-    fill: ${theme('colors.four')};
+    fill: ${theme('colors.primary.100')};
   }
 
   .st1 {

@@ -19,7 +19,7 @@ export const Tokens = {
   },
   font: {
     family: {
-      one: 'HK Grotesk, sans-serif'
+      one: 'Lato, sans-serif'
     },
     size: {
       eleven: '11px',

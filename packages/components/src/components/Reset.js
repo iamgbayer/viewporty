@@ -15,7 +15,7 @@ export const Reset = createGlobalStyle`
   body {
     width: 100%;
     height: 100%;
-    background-color: ${theme('colors.sixtiary')};
+    background-color: ${theme('colors.accent.600tiary')};
   }
 
   h1,

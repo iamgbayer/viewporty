@@ -4,6 +4,6 @@
   "github": {
     "enabled": true
   },
-  "builds": [{ "src": "packages/landing/next.config.js", "use": "@now/next" }],
-  "routes": [{ "src": "/(.*)", "dest": "/packages/landing/$1" }]
+  "builds": [{ "src": "packages/web/next.config.js", "use": "@now/next" }],
+  "routes": [{ "src": "/(.*)", "dest": "/packages/web/$1" }]
 }

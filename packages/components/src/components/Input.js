@@ -44,7 +44,7 @@ const Inputable = styled.input`
     theme('colors.eleven')
   )};
 
-  background-color: ${theme('colors.thirteen')};
+  background-color: ${theme('colors.accent.800')};
 
   ${ifProp(
     { disabled: true },
@@ -59,7 +59,7 @@ const Inputable = styled.input`
     ${ifProp(
       'hasError',
       theme('colors.support.sixtiary'),
-      theme('colors.twelve')
+      theme('colors.accent.700')
     )};
 
   ${ifProp(

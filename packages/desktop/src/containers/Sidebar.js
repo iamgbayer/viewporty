@@ -5,9 +5,9 @@ import { space } from 'styled-system'
 
 import { Icon, Text } from '@viewporty/components'
 import { useStoreActions, useStoreState } from 'easy-peasy'
-import { not } from 'ramda'
+import { not, prop } from 'ramda'
 
-import { Group } from '@/components'
+import { Group } from 'components'
 
 const Container = styled.div`
   display: flex;
@@ -20,14 +20,14 @@ const Content = styled.div`
 const Bar = styled.div`
   width: 100%;
   max-width: ${ifProp({ isCollapsed: true }, 40, 190)}px;
-  background-color: ${theme('colors.one')};
+  background-color: ${theme('colors.accent.100')};
   padding: ${ifProp({ isCollapsed: true }, '20px 5px', '20px 15px')};
 `
 
 const Separator = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${theme('colors.six')};
+  background-color: ${theme('colors.accent.600')};
   margin-bottom: 10px;
 `
 
@@ -47,10 +47,10 @@ const Option = ({
       onClick={onClick}
       marginBottom={15}
     >
-      <Icon name={icon} width={width} height={height} color={colors.five} />
+      <Icon name={icon} width={width} height={height} color="accent.400" />
 
       {not(isCollapsed) && (
-        <Text marginLeft="5px" color={colors.five}>
+        <Text marginLeft="5px" color="accent.400" fontSize={15}>
           {description}
         </Text>
       )}
@@ -69,34 +69,24 @@ Option.Container = styled.div`
 const Subtitle = styled(Text)`
   text-transform: uppercase;
   font-size: ${theme('font.size.fourteen')};
-  color: ${theme('colors.five')};
+  color: ${theme('colors.accent.400')};
   font-weight: ${theme('font.weight.medium')};
 `
 
 export const Sidebar = ({ children }) => {
-  const { isMenuCollapsed } = useStoreState(({ config }) => config)
+  const { isMenuCollapsed } = useStoreState(prop('config'))
 
-  const {
-    setModal,
-    toggleOrientation,
-    setScale,
-    setMenuCollapsed,
-    setAlign,
-    toggleDevtoolsVisibility
-  } = useStoreActions(({ config, devices }) => ({
-    toggleOrientation: devices.toggleOrientation,
-    setModal: config.setModal,
-    setScale: config.setScale,
-    setAlign: config.setAlign,
-    setMenuCollapsed: config.setMenuCollapsed,
-    toggleDevtoolsVisibility: config.toggleDevtoolsVisibility
-  }))
+  const { toggleOrientation, setScale, setAlign } = useStoreActions(
+    ({ config, devices }) => ({
+      toggleOrientation: devices.toggleOrientation,
+      setScale: config.setScale,
+      setAlign: config.setAlign
+    })
+  )
 
   return (
     <Container>
       <Bar isCollapsed={isMenuCollapsed}>
-        {/* <div onClick={() => setMenuCollapsed(!isMenuCollapsed)}>collapse</div> */}
-
         <Subtitle marginBottom={10}>Alignment</Subtitle>
 
         <Group
@@ -114,36 +104,22 @@ export const Sidebar = ({ children }) => {
 
         <Separator />
 
-        <Option
-          isCollapsed={isMenuCollapsed}
-          onClick={() => toggleOrientation('portrait')}
-          icon="phone"
-          description="Rotate portrait"
-        />
-        <Option
-          isCollapsed={isMenuCollapsed}
-          onClick={() => toggleOrientation('landscape')}
-          icon="portrait"
-          description="Rotate landscape"
-        />
+        <Subtitle marginBottom={10}>Orientation</Subtitle>
 
-        <Option
-          isCollapsed={isMenuCollapsed}
-          onClick={() => setModal('ORGANIZE_DEVICES')}
-          icon="layers"
-          width={19}
-          height={19}
-          description="Organize screens"
-        />
-
-        <Option
-          isCollapsed={isMenuCollapsed}
-          onClick={() => toggleDevtoolsVisibility()}
-          icon="devtools"
-          width={19}
-          height={19}
-          description="Devtools"
-        />
+        <Group marginBottom={15} hasActiveId="wrap">
+          <Group.Option
+            id="nowrap"
+            onClick={() => toggleOrientation('portrait')}
+          >
+            Portrait
+          </Group.Option>
+          <Group.Option
+            id="wrap"
+            onClick={() => toggleOrientation('landscape')}
+          >
+            Landscape
+          </Group.Option>
+        </Group>
 
         <Separator />
 

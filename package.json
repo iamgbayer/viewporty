@@ -6,10 +6,10 @@
   "dependencies": {},
   "scripts": {
     "start": "lerna run start",
-    "dev:landing": "yarn workspace @viewporty/landing dev",
-    "start:landing": "yarn workspace @viewporty/landing start",
+    "dev:web": "yarn workspace @viewporty/web dev",
+    "start:web": "yarn workspace @viewporty/web start",
     "start:desktop": "yarn workspace @viewporty/desktop start",
-    "build:landing": "yarn workspace @viewporty/landing build",
+    "build:web": "yarn workspace @viewporty/web build",
     "build:desktop": "yarn workspace @viewporty/desktop build",
     "bootstrap": "lerna bootstrap"
   },

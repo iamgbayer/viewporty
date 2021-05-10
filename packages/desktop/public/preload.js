@@ -50,7 +50,6 @@ const getCssPathCleaned = (element) => {
 
   while (element.parentNode != null) {
     let sibCount = 0
-    let sibIndex = 0
 
     for (
       let iterator = 0;
@@ -82,7 +81,7 @@ let responder
 let isViewing = false
 let canInspect = false
 
-const clickListener = (event) => {
+const clickEventListener = (event) => {
   if (canInspect && isViewing) {
     canInspect = false
 
@@ -90,18 +89,18 @@ const clickListener = (event) => {
     const { textContent } = target
     const { cssText } = window.getComputedStyle(target)
 
-    const data = {
+    const makeData = () => ({
       textContent,
       computedStyles: cssText,
       styles: getStyles(target),
       path: getCssPathCleaned(target)
-    }
+    })
 
     const allWebContents = remote.webContents.getAllWebContents()
 
     allWebContents.forEach((webContent) => {
       webContent.send('toInspect', false)
-      webContent.send('whenInspected', data)
+      webContent.send('whenInspected', makeData())
     })
 
     event.preventDefault()
@@ -113,22 +112,25 @@ const clickListener = (event) => {
     return
   }
 
-  document.removeEventListener('click', clickListener)
+  document.removeEventListener('click', clickEventListener)
 
-  ipcRenderer.send('whenClicked', getCssPath(event.target))
+  ipcRenderer.send('syncWhenClicked', getCssPath(event.target))
 
-  if (typeof responder !== 'undefind') clearTimeout(responder)
+  if (typeof responder !== 'undefined') clearTimeout(responder)
 
   responder = setTimeout(
-    () => document.addEventListener('click', clickListener),
+    () => document.addEventListener('click', clickEventListener),
     0
   )
 }
 
+const inputEventListener = (event) => {}
+
 document.addEventListener('DOMContentLoaded', () => {
   const inspector = new DomInspector()
 
-  document.addEventListener('click', clickListener)
+  document.addEventListener('click', clickEventListener)
+  document.addEventListener('input', inputEventListener)
 
   document.addEventListener('mouseout', () => {
     isViewing = false
@@ -142,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canInspect && inspector.enable()
   })
 
-  const getData = () => {
+  const getScrollData = () => {
     const { documentElement } = document
     const { scrollHeight, scrollTop, clientHeight } = documentElement
 
@@ -150,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('scroll', () => {
-    isViewing && ipcRenderer.send('whenScrolled', getData())
+    isViewing && ipcRenderer.send('whenScrolled', getScrollData())
   })
 
   ipcRenderer.on('toInspect', (_, data) => (canInspect = data))
@@ -170,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.scrollTo(0, (data / 100) * (scrollHeight - clientHeight))
   })
 
-  ipcRenderer.on('toClick', (_, data) => {
+  ipcRenderer.on('syncWhenClick', (_, data) => {
     const target = document.querySelector(data)
 
     if (isViewing) {

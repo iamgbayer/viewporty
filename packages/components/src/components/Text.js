@@ -22,7 +22,7 @@ export const Text = styled.span`
   ${ifNotProp(
     'color',
     css`
-      color: ${theme('colors.three')};
+      color: ${theme('colors.accent.300')};
     `
   )}
 `

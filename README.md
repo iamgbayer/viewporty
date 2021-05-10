@@ -10,7 +10,7 @@
 <br/>
   
 <p align="center">
-  <img  src="https://github.com/iamgbayer/viewporty/blob/master/packages/landing/src/assets/images/video.gif">
+  <img  src="https://github.com/iamgbayer/viewporty/blob/master/packages/web/src/assets/images/video.gif">
 </p>
 
 <br />

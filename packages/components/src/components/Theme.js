@@ -8,23 +8,19 @@ export const Theme = {
   dark: withTokens({
     theme: 'dark',
     colors: {
-      one: '#282C34',
-      two: '#1A1D21',
-      three: '#fafafa',
-      four: '#3D56F0',
-      five: '#aaa',
-      seven: 'rgba(68, 71, 90, 0.6)',
-      six: '#44475A',
-      twelve: '#E9E9E9',
-      thirteen: '#fff'
-    },
-    devtools: {
-      colors: {
-        one: '#87b2bc',
-        two: '#AE8152',
-        three: '#E3C381',
-        four: '#B7C47F',
-        five: '#35D4C7'
+      primary: {
+        100: '#3D56F0'
+      },
+      accent: {
+        100: '#393939',
+        200: '#2d2d2d',
+        300: '#fafafa',
+        400: '#ccc',
+        500: '#414141',
+        600: '#454545',
+        700: '#E9E9E9',
+        800: '#fff',
+        900: '#595959'
       }
     },
     shadow: {
@@ -43,8 +39,7 @@ export const Theme = {
       nine: '#5468FF',
       ten: '#E1EBFC',
       eleven: '#aaa',
-      twelve: '#E9E9E9',
-      thirteen: '#fff'
+      twelve: '#E9E9E9'
     },
     shadow: {
       one: '0px 12px 19px rgba(0, 0, 0, 0.0851449)',

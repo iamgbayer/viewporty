@@ -11,7 +11,7 @@ const Overlay = styled.div`
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  background-color: ${theme('colors.seven')};
+  background-color: ${theme('colors.accent.500')};
   position: fixed;
   z-index: ${theme('zindex.overlay')};
   overflow: hidden;
@@ -20,7 +20,7 @@ const Overlay = styled.div`
 const Content = styled.div`
   width: 100%;
   max-width: 550px;
-  background-color: ${theme('colors.one')};
+  background-color: ${theme('colors.accent.100')};
   border-radius: ${theme('border.radius.four')};
   box-shadow: ${theme('shadow.one')};
   padding: 35px 25px;
@@ -72,7 +72,7 @@ export function Modal({ children, isOpen, close }) {
                 width={35}
                 height={35}
                 onClick={close}
-                color={colors.five}
+                color="accent.400"
               />
 
               {children}

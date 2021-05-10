@@ -14,7 +14,7 @@ import {
   pipe
 } from 'ramda'
 
-import { DEVICES } from '@/constants'
+import { DEVICES } from './constants'
 
 const state = {
   history: {
@@ -101,6 +101,16 @@ const state = {
       const { data } = state
 
       const devices = map(assoc('orientation', orientation), data)
+
+      return evolve({ data: always(devices) }, state)
+    }),
+    setWebviewIdByName: action((state, { name, webviewId }) => {
+      const { data } = state
+
+      const devices = map(
+        when(propEq('name', name), assoc('webviewId', webviewId)),
+        data
+      )
 
       return evolve({ data: always(devices) }, state)
     }),

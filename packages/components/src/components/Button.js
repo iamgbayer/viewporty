@@ -10,7 +10,7 @@ const Container = styled.button`
   ${ifNotProp(
     'color',
     css`
-      color: ${theme('colors.one')};
+      color: ${theme('colors.accent.100')};
     `
   )}
 
@@ -20,15 +20,15 @@ const Container = styled.button`
     large: '48px'
   })};
   background-color: ${switchProp('variant', {
-    primary: theme('colors.one'),
-    secondary: theme('colors.four')
+    primary: theme('colors.accent.100'),
+    secondary: theme('colors.primary.100')
   })};
-  
+
   padding: ${switchProp('size', {
     default: '0 15px',
     large: '0 25px'
   })};
-  
+
   border: none;
   cursor: pointer;
   display: flex;
@@ -88,7 +88,7 @@ export const Button = ({
           {icon({
             width: 12,
             height: 12,
-            color: colors.one
+            color: colors.accent[100]
           })}
         </Icon>
       )}

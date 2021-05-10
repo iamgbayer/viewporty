@@ -10,7 +10,7 @@ const { platform } = window.require('os')
 
 const Container = styled.div`
   width: 235px;
-  height: 36px;
+  height: 40px;
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -39,7 +39,7 @@ const WindowsControl = styled.div`
   align-items: center;
 
   &:hover {
-    background-color: ${theme('colors.six')};
+    background-color: ${theme('colors.accent.600')};
   }
 `
 
@@ -56,7 +56,7 @@ const Circle = styled.div`
   width: 12px;
   height: 12px;
   border-radius: ${theme('border.radius.fifty')};
-  background-color: ${theme('colors.five')};
+  background-color: ${theme('colors.accent.400')};
   cursor: pointer;
 `
 

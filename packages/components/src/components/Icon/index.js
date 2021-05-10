@@ -1,8 +1,10 @@
 import React, { memo, useContext } from 'react'
 import styled, { ThemeContext, css } from 'styled-components'
+import get from 'lodash/get'
 import { ifProp } from 'styled-tools'
 import { equals } from 'ramda'
 import { space } from 'styled-system'
+import {} from 'helpers'
 
 import * as Icons from './Icons'
 
@@ -24,21 +26,21 @@ const Container = styled.div`
   )}
 `
 
-export const Icon = memo(({ name, color, width, height, ...props }) => {
-  const { colors, theme } = useContext(ThemeContext)
+export const Icon = memo(
+  ({ name, color = 'accent.400', width, height, ...props }) => {
+    const { colors } = useContext(ThemeContext)
 
-  const Iconable = Icons[capitalize(name)]
+    const Iconable = Icons[capitalize(name)]
 
-  return (
-    <Container {...props}>
-      <Iconable
-        {...props}
-        width={width}
-        height={height}
-        color={
-          color ? color : equals(theme, 'dark') ? colors.five : colors.three
-        }
-      />
-    </Container>
-  )
-})
+    return (
+      <Container {...props}>
+        <Iconable
+          {...props}
+          width={width}
+          height={height}
+          color={get(colors, color)}
+        />
+      </Container>
+    )
+  }
+)

@@ -7,6 +7,7 @@ export const DEVICES = [
     isHidden: false,
     scale: 75,
     orientation: 'portrait',
+    webviewId: null,
     userAgent:
       'Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Mobile Safari/537.36'
   },
@@ -17,6 +18,7 @@ export const DEVICES = [
     width: 768,
     height: 1024,
     orientation: 'portrait',
+    webviewId: null,
     scale: 75,
     userAgent:
       'Mozilla/5.0 (iPad; CPU OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
@@ -27,6 +29,7 @@ export const DEVICES = [
     width: 320,
     height: 568,
     isHidden: false,
+    webviewId: null,
     orientation: 'portrait',
     scale: 75,
     userAgent:
@@ -38,6 +41,7 @@ export const DEVICES = [
     isHidden: true,
     width: 375,
     height: 667,
+    webviewId: null,
     orientation: 'portrait',
     scale: 75,
     userAgent:
@@ -49,6 +53,7 @@ export const DEVICES = [
     isHidden: true,
     width: 414,
     height: 896,
+    webviewId: null,
     orientation: 'portrait',
     scale: 75,
     userAgent:
@@ -60,6 +65,7 @@ export const DEVICES = [
     isHidden: true,
     width: 360,
     height: 740,
+    webviewId: null,
     orientation: 'portrait',
     scale: 75,
     userAgent:
@@ -70,6 +76,7 @@ export const DEVICES = [
     category: 'phone',
     isHidden: true,
     width: 375,
+    webviewId: null,
     height: 812,
     orientation: 'portrait',
     scale: 75,
@@ -82,6 +89,7 @@ export const DEVICES = [
     isHidden: true,
     scale: 75,
     width: 411,
+    webviewId: null,
     height: 824,
     orientation: 'portrait',
     userAgent:
@@ -93,6 +101,7 @@ export const DEVICES = [
     isHidden: true,
     scale: 75,
     width: 411,
+    webviewId: null,
     height: 731,
     orientation: 'portrait',
     userAgent:
